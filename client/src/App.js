@@ -30,7 +30,8 @@ class App extends Component {
       this.setState({instance});
       console.log("McCoyContract instance..",this.state.instance);
       const contractAddress = await instance.options.address;
-
+      const name = await instance.methods.name.call();
+      console.log('name', name);
       this.setState({contractAddress});
       console.log("contractAddress...",this.state.contractAddress);
      
