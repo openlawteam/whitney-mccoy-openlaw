@@ -1,5 +1,5 @@
-var McCoy= artifacts.require("./McCoy.sol");
-
+var McCoy= artifacts.require("./McCoyContract.sol");
+//./client/src/contracts
 module.exports = function(deployer) {
   deployer.deploy(McCoy);
 };
