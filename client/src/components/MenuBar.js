@@ -13,30 +13,42 @@ export default class MenuBar extends Component {
     return (
       <Menu>
         <Menu.Item
-          name='editorials'
-          active={activeItem === 'editorials'}
+          name='landingPage'
+          active={activeItem === 'landingPage'}
           onClick={this.handleItemClick}
-          //href='/'
+          as = {NavLink}
+          to = '/'
         >
-        <NavLink to='/'> Home </NavLink> 
-      
+        Token Tracker
         </Menu.Item>
 
-        <Menu.Item name='reviews' 
-        active={activeItem === 'reviews'}
-        onClick={this.handleItemClick}>
+        <Menu.Item name='newDonor' 
+        active={activeItem === 'newDonor'}
+        onClick={this.handleItemClick}
+        as = {NavLink}
+        to = '/New-Donor'
+        >
           Sign up to be Donor
         </Menu.Item>
 
         <Menu.Item
-          name='upcomingEvents'
-          active={activeItem === 'upcomingEvents'}
+          name='transferDonor'
+          active={activeItem === 'transferDonor'}
           onClick={this.handleItemClick}
-          
-         // href='/Transfer-Donor'
+          as = {NavLink}
+          to = '/Transfer-Donor' 
         >
-             
-          <NavLink to='/Transfer-Donor'> Transfer-Donor </NavLink> 
+        Transfer Donor Token
+        </Menu.Item>
+
+        <Menu.Item
+          name='artistDashboard'
+          active={activeItem === 'artistDashboard'}
+          onClick={this.handleItemClick}
+          as = {NavLink}
+          to = '/Artist-Dashboard' 
+        >
+          Artist Dashboard
         </Menu.Item>
       </Menu>
     )

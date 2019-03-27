@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import McCoyContract from "./contracts/McCoyContract.json";
 //import IERC721 from "./contracts/IERC721.json";
 import getWeb3 from "./utils/getWeb3";
-import { Container,Grid, Button, Form, Image} from 'semantic-ui-react';
+import { Container,Grid, Button, Form, Image, Divider} from 'semantic-ui-react';
 import { APIClient, Openlaw } from 'openlaw';
 import TokenDisplayTable from './components/tokenDisplayTable';
 import MenuBar from './components/MenuBar';
 import ImageMcCoy from './components/ImageMcCoy';
 import TransferDonorPage from './pages/TransferDonorPage';
 import LandingPage from './pages/LandingPage';
+import NewDonorPage from './pages/NewDonorPage';
+import ArtistDashboardPage from './pages/ArtistDashboardPage';
 
 import { NavLink, Switch, Route, withRouter } from 'react-router-dom';
 import "./App.css";
@@ -88,7 +90,7 @@ class App extends Component {
       <Container>
         <MenuBar/>
         <h1>Public Private Key </h1>
-        <Grid  columns={2} divided>>
+        <Grid  columns={2} divided >
            <Grid.Row>
             <Grid.Column width={10}>
                 <ImageMcCoy/>
@@ -98,13 +100,15 @@ class App extends Component {
             <p> Token Name {this.state.tokenName} </p>
             <p> Token symbol {this.state.tokenSymbol}</p>
           </Grid.Column>
-
           </Grid.Row>
         </Grid>
+          <Divider hidden />
      
       <Switch>
         <Route exact path='/' component={LandingPage}></Route>
          <Route exact path='/Transfer-Donor' component={TransferDonorPage}></Route>
+          <Route exact path='/New-Donor' component={NewDonorPage}></Route>
+        <Route exact path='/Artist-Dashboard' component={ArtistDashboardPage}></Route>
       </Switch>
 
         </Container>
