@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
+import { NavLink, Link,Switch, Route } from 'react-router-dom';
 
 export default class MenuBar extends Component {
   state = {}
@@ -15,8 +16,10 @@ export default class MenuBar extends Component {
           name='editorials'
           active={activeItem === 'editorials'}
           onClick={this.handleItemClick}
+          //href='/'
         >
-          Home
+        <NavLink to='/'> Home </NavLink> 
+      
         </Menu.Item>
 
         <Menu.Item name='reviews' 
@@ -29,8 +32,11 @@ export default class MenuBar extends Component {
           name='upcomingEvents'
           active={activeItem === 'upcomingEvents'}
           onClick={this.handleItemClick}
+          
+         // href='/Transfer-Donor'
         >
-          Transfer Token
+             
+          <NavLink to='/Transfer-Donor'> Transfer-Donor </NavLink> 
         </Menu.Item>
       </Menu>
     )

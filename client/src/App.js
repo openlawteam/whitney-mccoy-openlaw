@@ -6,7 +6,11 @@ import { Container,Grid, Button, Form, Image} from 'semantic-ui-react';
 import { APIClient, Openlaw } from 'openlaw';
 import TokenDisplayTable from './components/tokenDisplayTable';
 import MenuBar from './components/MenuBar';
+import ImageMcCoy from './components/ImageMcCoy';
+import TransferDonorPage from './pages/TransferDonorPage';
+import LandingPage from './pages/LandingPage';
 
+import { NavLink, Switch, Route, withRouter } from 'react-router-dom';
 import "./App.css";
 
 class App extends Component {
@@ -83,19 +87,30 @@ class App extends Component {
 
       <Container>
         <MenuBar/>
-        <Image src={require('./mccoy.png')}/>
         <h1>Public Private Key </h1>
-        <p> Contract Address {this.state.contractAddress}</p>
-        <p> Token Name {this.state.tokenName} </p>
-        <p> Token symbol {this.state.tokenSymbol}</p>
+        <Grid  columns={2} divided>>
+           <Grid.Row>
+            <Grid.Column width={10}>
+                <ImageMcCoy/>
+            </Grid.Column>
+          <Grid.Column width={6}>
+            <p> Contract Address {this.state.contractAddress}</p>
+            <p> Token Name {this.state.tokenName} </p>
+            <p> Token symbol {this.state.tokenSymbol}</p>
+          </Grid.Column>
 
-        <TokenDisplayTable/>
+          </Grid.Row>
+        </Grid>
+     
+      <Switch>
+        <Route exact path='/' component={LandingPage}></Route>
+         <Route exact path='/Transfer-Donor' component={TransferDonorPage}></Route>
+      </Switch>
 
-        <Button>Submit</Button>
         </Container>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
