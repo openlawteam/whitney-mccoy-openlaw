@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import McCoyContract from "./contracts/McCoyContract.json";
 //import IERC721 from "./contracts/IERC721.json";
 import getWeb3 from "./utils/getWeb3";
-import { Container,Grid, Button, Form} from 'semantic-ui-react';
+import { Container,Grid, Button, Form, Image} from 'semantic-ui-react';
 import { APIClient, Openlaw } from 'openlaw';
+import TokenDisplayTable from './components/tokenDisplayTable';
+import MenuBar from './components/MenuBar';
+
 import "./App.css";
 
 class App extends Component {
-  state = { instance: undefined, contractAddress: null,
+  state = { instance: undefined, contractAddress: null, 
+    tokenName:null, tokenSymbol:null,
     web3: null, accounts: null, contract: null };
 
   componentDidMount = async () => {
@@ -30,19 +34,28 @@ class App extends Component {
       this.setState({instance});
       console.log("McCoyContract instance..",this.state.instance);
       const contractAddress = await instance.options.address;
-      const name = await instance.methods.name.call();
-      console.log('name', name);
+      // const name = await instance.methods.name.call();
+      // console.log('name', name);
       this.setState({contractAddress});
       console.log("contractAddress...",this.state.contractAddress);
      
-      // instance.methods.name().call({from: accounts[0]}, (error, result) => 
-      //   {console.log(error, result)});
+      instance.methods.name().call({from: accounts[0]}, (error, tokenName) => 
+        {
+          console.log(error, tokenName);
+          this.setState({tokenName});
+        });
+
+        instance.methods.symbol().call({from: accounts[0]}, (error, tokenSymbol) => 
+        {
+          console.log(error, tokenSymbol);
+          this.setState({tokenSymbol});
+        });
         
-      // instance.methods.isMinter('0xad9b86640008f02d9f2f3f0702133cea4eecb18c').call({
-      //     from: accounts[0] 
-      //   }, (error, result) => {
-      //     console.log(result);
-      // }); 
+      instance.methods.isMinter('0xad9b86640008f02d9f2f3f0702133cea4eecb18c').call({
+          from: accounts[0] 
+        }, (error, result) => {
+          console.log(result);
+      }); 
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -67,9 +80,16 @@ class App extends Component {
     }
     return (
       <div className="App">
+
       <Container>
-        <h1>Good to Go!</h1>
-        <p>contract K {this.state.contractAddress}</p>
+        <MenuBar/>
+        <Image src={require('./mccoy.png')}/>
+        <h1>Public Private Key </h1>
+        <p> Contract Address {this.state.contractAddress}</p>
+        <p> Token Name {this.state.tokenName} </p>
+        <p> Token symbol {this.state.tokenSymbol}</p>
+
+        <TokenDisplayTable/>
 
         <Button>Submit</Button>
         </Container>
