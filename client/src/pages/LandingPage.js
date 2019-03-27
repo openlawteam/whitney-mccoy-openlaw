@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container }from 'semantic-ui-react';
+import { Container, Divider }from 'semantic-ui-react';
 
 import TokenDisplayTable from '../components/tokenDisplayTable';
 
@@ -9,6 +9,7 @@ class LandingPage extends Component {
 		<Container>
 			
 			<TokenDisplayTable/>
+			<Divider/>
 
 		</Container>
 		)

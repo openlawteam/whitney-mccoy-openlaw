@@ -1,7 +1,8 @@
 import React from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Segment } from 'semantic-ui-react'
 
 const TransferTokenForm = () => (
+  <Segment color = 'orange'>
   <Form>
     <Form.Field>
       <label>My Ethereum Address</label>
@@ -17,6 +18,7 @@ const TransferTokenForm = () => (
     </Form.Field>
     <Button type='submit'>Transfer Token</Button>
   </Form>
+  </Segment>
 )
 
 export default TransferTokenForm

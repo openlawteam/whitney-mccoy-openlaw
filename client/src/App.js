@@ -4,15 +4,19 @@ import McCoyContract from "./contracts/McCoyContract.json";
 import getWeb3 from "./utils/getWeb3";
 import { Container,Grid, Button, Form, Image, Divider} from 'semantic-ui-react';
 import { APIClient, Openlaw } from 'openlaw';
+//Components - put into a Header component?
 import TokenDisplayTable from './components/tokenDisplayTable';
 import MenuBar from './components/MenuBar';
 import ImageMcCoy from './components/ImageMcCoy';
+//import Header from './components/Header';
+//Pages
 import TransferDonorPage from './pages/TransferDonorPage';
 import LandingPage from './pages/LandingPage';
 import NewDonorPage from './pages/NewDonorPage';
 import ArtistDashboardPage from './pages/ArtistDashboardPage';
-
+//Router
 import { NavLink, Switch, Route, withRouter } from 'react-router-dom';
+//CSS
 import "./App.css";
 
 class App extends Component {
@@ -90,10 +94,10 @@ class App extends Component {
       <Container>
         <MenuBar/>
         <h1>Public Private Key </h1>
-        <Grid  columns={2} divided >
+          <Grid  columns={2} divided >
            <Grid.Row>
             <Grid.Column width={10}>
-                <ImageMcCoy/>
+              <ImageMcCoy/>
             </Grid.Column>
           <Grid.Column width={6}>
             <p> Contract Address {this.state.contractAddress}</p>
@@ -102,7 +106,7 @@ class App extends Component {
           </Grid.Column>
           </Grid.Row>
         </Grid>
-          <Divider hidden />
+      <Divider hidden />
      
       <Switch>
         <Route exact path='/' component={LandingPage}></Route>

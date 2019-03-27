@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container }from 'semantic-ui-react';
+import { Container, Divider }from 'semantic-ui-react';
 import TransferTokenForm from '../components/TransferToken';
 class TransferDonorPage extends Component {
 	render() {
@@ -7,6 +7,7 @@ class TransferDonorPage extends Component {
 		<Container>
 			<h2>Transfer Donor Page</h2>
 			<TransferTokenForm/>
+			<Divider/>
 
 		</Container>
 		)
