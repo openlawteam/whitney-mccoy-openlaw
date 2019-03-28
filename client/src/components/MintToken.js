@@ -5,15 +5,24 @@ import getWeb3 from "../utils/getWeb3";
 
 class MintToken extends Component {
 
-  state = {instance: undefined, contract: null, tokenId: '', metaData: ''};
+  state = {instance: undefined,
+    accounts:null, web3:null, tokenId: '', metaData: ''};
 
    componentDidMount = async () => {
-    //console.log("mint mounint...");
+    
       try{
         console.log('minting component..');
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
-        console.log('accounts..',accounts[0]);
+        console.log('mint accounts..',accounts[0]);
+        const networkId = await web3.eth.net.getId();
+        const deployedNetwork = McCoyContract.networks[networkId];
+
+      const instance = new web3.eth.Contract(
+        McCoyContract.abi,
+        deployedNetwork && deployedNetwork.address,
+      );
+        this.setState({accounts, web3, instance})
 
       } catch(error) {
         console.log("errors..",error);
@@ -22,22 +31,21 @@ class MintToken extends Component {
 
 
   mintToken = async (event)=> {
+    const accounts = this.state.accounts;
+    const instance = this.state.instance;
     console.log('minting...',this.state.metaData, this.state.tokenId);
     event.preventDefault();
-    // try{
-    //   const accounts = await getWeb3.eth.getAccounts();
-    //   console.log("sending from MM: " + accounts[0]);
-
-    // } catch(error) {
-    //   console.log(error);
-    // }
-
-  // instance.methods.createMcCoyToken(
-  //       this.state.metaData, this.state.tokenId).send( 
-  //       {from: accounts[0]}, (error, txHash) =>{
-  //           console.log(error, txHash);
-  //       });
-  };
+    try{
+     
+    instance.methods.createMcCoyToken(
+          this.state.metaData, this.state.tokenId).send( 
+          {from: accounts[0]}, (error, txHash) =>{
+              console.log(error, txHash);
+          });
+    } catch(error) {
+      console.log("mint error..",error);
+    } //error
+  }; //mintToken
 
   render() {
 
