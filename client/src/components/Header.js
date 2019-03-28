@@ -44,6 +44,12 @@ class Header extends Component{
           console.log(error, tokenSymbol);
           this.setState({tokenSymbol});
         });
+
+        instance.methods.totalSupply().call({from: accounts[0]}, (error, allTokens) =>
+        {
+          console.log(error, allTokens);
+          this.setState({allTokens});
+        });
         
 
       // Set web3, accounts, and contract to the state, and then proceed with an
@@ -69,6 +75,7 @@ class Header extends Component{
             <p> Contract Address {this.state.contractAddress}</p>
             <p> Token Name {this.state.tokenName} </p>
             <p> Token symbol {this.state.tokenSymbol}</p>
+            <p> Total Supply Tokens {this.state.allTokens}</p>
           </Grid.Column>
           </Grid.Row>
         </Grid>

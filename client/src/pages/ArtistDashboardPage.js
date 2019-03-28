@@ -10,7 +10,7 @@ class ArtistDashboardPage extends Component {
 		<Container>
 			<h2>Artist Dashboard</h2>
 			
-				<MintToken/>
+			<MintToken/>
 			
 			 <Divider hidden/>
 			 
@@ -19,9 +19,9 @@ class ArtistDashboardPage extends Component {
 			<Divider hidden/>
 			
 			<AllowSpender/>
+			
 			<Divider/>
 	
-
 		</Container>
 		)
 	}

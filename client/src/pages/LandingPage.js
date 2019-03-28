@@ -7,8 +7,6 @@ class LandingPage extends Component {
 	render() {
 		return(
 		<Container>
-			
-			
 			<CardExampleHeaderCard/>
 			<Divider/>
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
-import { NavLink, Link,Switch, Route } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 
 export default class MenuBar extends Component {
   state = {}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container,Grid, Button, Form, Image, Divider} from 'semantic-ui-react';
+import { Container, Divider} from 'semantic-ui-react';
 //Components
 import MenuBar from './components/MenuBar';
 import Header from './components/Header';
@@ -9,7 +9,7 @@ import LandingPage from './pages/LandingPage';
 import NewDonorPage from './pages/NewDonorPage';
 import ArtistDashboardPage from './pages/ArtistDashboardPage';
 //Router
-import { NavLink, Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 //CSS
 import "./App.css";
 
