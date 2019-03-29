@@ -1,5 +1,5 @@
 import Web3 from "web3";
-
+//REMOVED WINDOW EVENT LISTNER - CONFLICTS W/ REACT ROUTER
 const getWeb3 = () =>
   new Promise(async(resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
