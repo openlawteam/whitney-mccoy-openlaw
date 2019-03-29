@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Button, Form, Segment, Message } from 'semantic-ui-react'
 import McCoyContract from "../contracts/McCoyContract.json";
-//import getWeb3 from "../utils/getWeb3";
-const Web3 = require("web3");
+import getWeb3 from "../utils/getWeb3";
+//const Web3 = require("web3");
 class MintToken extends Component {
 
   state = {
@@ -20,9 +20,9 @@ class MintToken extends Component {
     
     try{
       console.log('minting component mounted..');
-      //const web3 = await getWeb3(window.ethereum);
-      const web3 = new Web3(window.ethereum);
-      await window.ethereum.enable();
+      const web3 = await getWeb3();
+      // const web3 = new Web3(window.ethereum);
+      // await window.ethereum.enable();
       const accounts = await web3.eth.getAccounts();
       console.log('mint accounts..',accounts[0]);
       const networkId = await web3.eth.net.getId();

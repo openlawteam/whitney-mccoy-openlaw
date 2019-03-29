@@ -14,6 +14,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import "./App.css";
 
 class App extends Component {
+  state = {web3:null}
 //   state = { instance: undefined, contractAddress: null, 
 //     tokenName:null, tokenSymbol:null,
 //     web3: null, accounts: null, contract: null };
