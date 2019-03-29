@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Divider, Segment }from 'semantic-ui-react';
+import { Container, Divider }from 'semantic-ui-react';
 import MintToken from '../components/MintToken';
 import TransferTokenForm from '../components/TransferToken';
 import AllowSpender from '../components/AllowSpender';

@@ -85,7 +85,7 @@ class App extends Component {
 
       <Container>
         <MenuBar/>
-        <Header/>
+       <Header/>
       <Divider hidden />
      
       <Switch>

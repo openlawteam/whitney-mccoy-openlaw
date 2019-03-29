@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import { Icon, Menu, Table } from 'semantic-ui-react'
 
 const TokenDisplayTable = () => (
   <Table celled>

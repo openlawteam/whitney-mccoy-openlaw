@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Grid }from 'semantic-ui-react';
+import { Grid }from 'semantic-ui-react';
 import ImageMcCoy from './ImageMcCoy';
 import McCoyContract from "../contracts/McCoyContract.json";
 import getWeb3 from "../utils/getWeb3";

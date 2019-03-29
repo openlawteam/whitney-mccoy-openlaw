@@ -5,8 +5,13 @@ import getWeb3 from "../utils/getWeb3";
 
 class MintToken extends Component {
 
-  state = {instance: undefined,
-    accounts:null, web3:null, tokenId: '', metaData: ''};
+  state = {
+    instance: null,
+    web3:null,
+    accounts: '', 
+    tokenId: '',
+    metaData: ''
+   };
 
    componentDidMount = async () => {
     
@@ -18,11 +23,12 @@ class MintToken extends Component {
         const networkId = await web3.eth.net.getId();
         const deployedNetwork = McCoyContract.networks[networkId];
 
-      const instance = new web3.eth.Contract(
-        McCoyContract.abi,
-        deployedNetwork && deployedNetwork.address,
-      );
-        this.setState({accounts, web3, instance})
+        const instance = new web3.eth.Contract(
+          McCoyContract.abi,
+          deployedNetwork && deployedNetwork.address,
+        );
+
+        this.setState({accounts, web3,instance})
 
       } catch(error) {
         console.log("errors..",error);
