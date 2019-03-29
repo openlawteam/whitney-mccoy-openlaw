@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Segment } from 'semantic-ui-react'
+import { Button, Form, Segment, Message } from 'semantic-ui-react'
 import McCoyContract from "../contracts/McCoyContract.json";
 import getWeb3 from "../utils/getWeb3";
 
@@ -10,37 +10,41 @@ class MintToken extends Component {
     web3:null,
     accounts: '', 
     tokenId: '',
-    metaData: ''
+    metaData: '',
+    loading: false, 
+    errorMessage:'',
+    successMessage: ''
    };
 
-   componentDidMount = async () => {
+  componentDidMount = async () => {
     
-      try{
-        console.log('minting component..');
-        const web3 = await getWeb3();
-        const accounts = await web3.eth.getAccounts();
-        console.log('mint accounts..',accounts[0]);
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = McCoyContract.networks[networkId];
+    try{
+      console.log('minting component mounted..');
+      const web3 = await getWeb3();
+      const accounts = await web3.eth.getAccounts();
+      console.log('mint accounts..',accounts[0]);
+      const networkId = await web3.eth.net.getId();
+      const deployedNetwork = McCoyContract.networks[networkId];
 
-        const instance = new web3.eth.Contract(
-          McCoyContract.abi,
-          deployedNetwork && deployedNetwork.address,
-        );
+      const instance = new web3.eth.Contract(
+        McCoyContract.abi,
+        deployedNetwork && deployedNetwork.address,
+      );
 
-        this.setState({accounts, web3,instance})
+      this.setState({accounts, web3,instance})
 
-      } catch(error) {
-        console.log("errors..",error);
-      }
-   }
-
+    } catch(error) {
+      console.log("errors..",error);
+    }
+  }
 
   mintToken = async (event)=> {
     const accounts = this.state.accounts;
     const instance = this.state.instance;
     console.log('minting...',this.state.metaData, this.state.tokenId);
+    this.setState({loading: true, errorMessage:'', successMessage:''});
     event.preventDefault();
+    
     try{
      
     instance.methods.createMcCoyToken(
@@ -48,16 +52,24 @@ class MintToken extends Component {
           {from: accounts[0]}, (error, txHash) =>{
               console.log(error, txHash);
           });
-    } catch(error) {
-      console.log("mint error..",error);
+           this.setState({successMessage: 'ART NFT Created!'});
+    } //try
+    catch(error) {
+      this.setState({errorMessage:error.message});
     } //error
+      this.setState({loading:false});
+      console.log("art token done");
   }; //mintToken
 
   render() {
 
     return (
       <Segment color = 'teal'>
-      <Form onSubmit = {this.mintToken}>
+      <Form onSubmit = {this.mintToken}
+            success={!!this.state.successMessage}
+            error={!!this.state.errorMessage}>
+            <Message error header='Error try refreshing page' content={this.state.errorMessage} />
+            <Message success header='Complete' content={this.state.successMessage} />
         <Form.Field>
           <label>Meta Data to Include</label>
           <input placeholder='some string' 
@@ -74,7 +86,9 @@ class MintToken extends Component {
           />
         </Form.Field>
 
-        <Button type='submit'>Mint Token</Button>
+        <Button 
+        loading={this.state.loading}
+        type='submit'>Mint Token</Button>
       </Form>
       </Segment>
 
