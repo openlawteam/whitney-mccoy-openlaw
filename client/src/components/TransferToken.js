@@ -33,7 +33,7 @@ class TransferTokenForm extends Component {
         );
 
         this.setState({accounts, web3,instance})
-        instance.methods.safeTransferFrom().send({from: accounts[0]}, (error, transactionHash) => 
+        instance.methods.safeTransferFrom(this.state.currentEthereumAddress, this.state.newEthereumAddress, this.state.tokenId).send({from: accounts[0]}, (error, transactionHash) => 
         {
           console.log(error, transactionHash);
           
