@@ -45,8 +45,10 @@ class Header extends Component{
           this.setState({tokenSymbol});
         });
 
-        instance.methods.totalSupply().call({from: accounts[0]}, (error, allTokens) =>
+        instance.methods.totalSupply().call({from: accounts[0]}, (error, result) =>
         {
+         //had to add resutl.toString() - all of sudden got bigNumber errors in react
+          const allTokens = result.toString(10);
           console.log(error, allTokens);
           this.setState({allTokens});
         });

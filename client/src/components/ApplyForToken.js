@@ -18,8 +18,25 @@ import 'openlaw-elements/dist/openlaw-elements.min.css';
       userName:OPENLAW_USER,
       password:OPENLAW_PASSWORD
     }
+ const apiClient = new APIClient(URL);
 
 class ApplyForToken extends Component {
+   //state = {apiClient:null};
+
+
+  componentDidMount = async() => {
+
+    
+    console.log('apply for token..', openLawConfig.userName, openLawConfig.password);
+    try{
+      //apiClient.login(openLawConfig.userName,openLawConfig.password).then(console.log);
+      console.log(apiClient);
+    }
+    catch(error){
+      console.log('errors..', error);
+    }
+    
+  }
 
   render() {
     return(
