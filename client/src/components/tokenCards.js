@@ -1,8 +1,45 @@
-import React from 'react'
-import { Card } from 'semantic-ui-react'
+import React, { Component } from "react";
+import McCoyContract from "../contracts/McCoyContract.json";
+import getWeb3 from "../utils/getWeb3";
+import { Card, Container } from 'semantic-ui-react'
 
-const CardExampleHeaderCard = () => (
-  <Card.Group itemsPerRow={3}>
+
+class TokenCards extends Component {
+  state = {
+    instance: null, 
+    web3: null, 
+    accounts:''
+  }
+
+componentDidMount = async () => {
+  this.updateCards();
+
+}
+
+updateCards = async(event)=>{
+  console.log('updating cards..');
+  try{
+        const web3 = await getWeb3();
+        const accounts = await web3.eth.getAccounts();
+        console.log('update cards from ..',accounts[0]);
+        const networkId = await web3.eth.net.getId();
+        const deployedNetwork = McCoyContract.networks[networkId];
+
+        const instance = new web3.eth.Contract(
+          McCoyContract.abi,
+          deployedNetwork && deployedNetwork.address,
+        );
+
+
+  }catch(error){
+    console.log('error updating cards', error)
+  }
+}
+
+  render() {
+    return(
+  
+   <Card.Group itemsPerRow={3}>
     <Card>
       <Card.Content>
         <Card.Header>Token Id 1</Card.Header>
@@ -28,12 +65,10 @@ const CardExampleHeaderCard = () => (
       />
     </Card>
 
-    <Card
-      header='Jenny Hess'
-      meta='Friend'
-      description='Jenny is a student studying Media Management at the New School'
-    />
   </Card.Group>
-)
 
-export default CardExampleHeaderCard
+)
+  }
+}
+
+export default TokenCards

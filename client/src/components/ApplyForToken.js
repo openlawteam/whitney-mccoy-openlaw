@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Form, Button }from 'semantic-ui-react';
+import { Container, Form, Button, Checkbox }from 'semantic-ui-react';
 import { APIClient, Openlaw } from 'openlaw';
 import OpenLawForm from 'openlaw-elements';
 import 'openlaw-elements/dist/openlaw-elements.min.css';
@@ -56,6 +56,30 @@ class ApplyForToken extends Component {
     return(
     <Container>
       <h2>powered by openlaw</h2>
+
+      <Form>
+        <Form.Field>
+          <label>First Name</label>
+          <input placeholder='First Name' />
+        </Form.Field>
+        <Form.Field>
+          <label>Last Name</label>
+          <input placeholder='Last Name' />
+        </Form.Field>
+          <Form.Field>
+          <label>Email</label>
+          <input placeholder='Email' required/>
+        </Form.Field>
+        <Form.Field>
+          <label>My Ethereum Address</label>
+          <input placeholder='My Ethereum Address' />
+        </Form.Field>
+        <Form.Field>
+          <Checkbox label='I agree to the Terms and Conditions' />
+        </Form.Field>
+        <Button type='submit'>Submit</Button>
+      </Form>
+
 
     </Container>
     )
