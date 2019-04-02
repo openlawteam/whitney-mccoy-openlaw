@@ -8,7 +8,8 @@ class TokenCards extends Component {
   state = {
     instance: null, 
     web3: null, 
-    accounts:''
+    accounts:'',
+    tokenId:''
   }
 
 componentDidMount = async () => {
@@ -29,6 +30,17 @@ updateCards = async(event)=>{
           McCoyContract.abi,
           deployedNetwork && deployedNetwork.address,
         );
+        this.setState({accounts, web3, instance});
+        //map this for each token that exists 
+        instance.methods.ownerOf(1).call({from: accounts[0]}, (error, result) =>{
+          console.log(error, result);
+        });
+
+        instance.methods.tokenURI(1).call({from: accounts[0]}, (error, result) =>{
+          console.log(error, result);
+        })
+
+
 
 
   }catch(error){
