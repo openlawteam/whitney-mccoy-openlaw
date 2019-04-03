@@ -9,7 +9,8 @@ class TokenCards extends Component {
     instance: null, 
     web3: null, 
     accounts:'',
-    tokenId:''
+    tokenId:'',
+    allTokens:null
   }
 
 componentDidMount = async () => {
@@ -39,8 +40,18 @@ updateCards = async(event)=>{
          //had to add resutl.toString() - all of sudden got bigNumber errors in react
           const allTokens = result.toString(10);
           console.log(error, allTokens);
-          //this.setState({allTokens});
+          this.setState({allTokens});
         });
+
+      var i; 
+
+      for(i=0; i < 5; i++){
+        instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
+          const tokenByIndexList = result.toString(10);
+          console.log(error, tokenByIndexList);
+        });
+
+      }
 //CALL THESE METHODS FOR ALL TOKENS IN THE ARRAY < totalSupply
 
         //get the tokenID at an index position. 
