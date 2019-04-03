@@ -52,6 +52,18 @@ updateCards = async(event)=>{
       for(i=0; i < 5; i++){
         instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
           const tokenByIndexList = result.toString(10);
+
+          ///FELIPE SOLUTION
+//           let ownerAddress = await functionToGetOwner();
+// let propertyN = await functionToGetPropertyN();
+// myTokenList.push({
+// key: i,
+// tokenId: result.tokenId,
+// tokenMetadata: result.tokenMetadata,
+// owner: ownerAddress,
+// propertyN: propertyN
+// });
+
           myTokenList.push(tokenByIndexList);
           // this.setState({myTokenList});
           // console.log('myTokenList', this.state.myTokenList);
