@@ -20,6 +20,7 @@ componentDidMount = async () => {
 updateCards = async(event)=>{
   console.log('updating cards..');
   try{
+      //connect to web3 and contract instance 
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
         console.log('update cards from ..',accounts[0]);
@@ -33,12 +34,22 @@ updateCards = async(event)=>{
         this.setState({accounts, web3, instance});
        
         //need list of all tokenIDs that exist 
+      instance.methods.totalSupply().call({from: accounts[0]}, (error, result) =>
+        {
+         //had to add resutl.toString() - all of sudden got bigNumber errors in react
+          const allTokens = result.toString(10);
+          console.log(error, allTokens);
+          //this.setState({allTokens});
+        });
+//CALL THESE METHODS FOR ALL TOKENS IN THE ARRAY < totalSupply
+
+        //get the tokenID at an index position. 
         instance.methods.tokenByIndex(1).call({from: accounts[0]}, (error, result) =>{
           const tokenByIndexList = result.toString(10);
           console.log(error, tokenByIndexList);
         });
 
-        //map this for each tokenId that exists 
+        //get owner of a token Id
         instance.methods.ownerOf(1).call({from: accounts[0]}, (error, result) =>{
           console.log(error, result);
         });
