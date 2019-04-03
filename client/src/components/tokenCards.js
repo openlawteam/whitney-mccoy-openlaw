@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import McCoyContract from "../contracts/McCoyContract.json";
 import getWeb3 from "../utils/getWeb3";
-import { Card, Container } from 'semantic-ui-react'
+import { Card, Table, Container } from 'semantic-ui-react'
 
 
 class TokenCards extends Component {
@@ -44,11 +44,11 @@ updateCards = async(event)=>{
           console.log(error, allTokens);
           this.setState({allTokens});
         });
-//Loop over token index and get the token Ids
+//Loop over token index and get the token Ids to make array of tokenIds
       var i; 
-      //const myTokenList = props.myTokenList;
+      //const myTokenList = props.myTokenList;  
       const myTokenList = [];
-
+      //TODO change to 'allTokens', instead of hard code, 
       for(i=0; i < 5; i++){
         instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
           const tokenByIndexList = result.toString(10);
@@ -56,6 +56,7 @@ updateCards = async(event)=>{
           // this.setState({myTokenList});
           // console.log('myTokenList', this.state.myTokenList);
           console.log(error, tokenByIndexList);
+
         });
 
       }
@@ -87,6 +88,7 @@ updateCards = async(event)=>{
   render() {
     return(
   <Container>
+  <h3> token list </h3>
    <Card.Group itemsPerRow={3}>
     <Card>
       <Card.Content>
@@ -95,22 +97,6 @@ updateCards = async(event)=>{
          <Card.Description>0xad9b86640008f02d9f2f3f0702133cea4eecb18c</Card.Description>
         <Card.Meta>Current Donor</Card.Meta>
       </Card.Content>
-    </Card>
-
-    <Card>
-      <Card.Content>
-        <Card.Header content='Jake Smith' />
-        <Card.Meta content='Musicians' />
-        <Card.Description content='Jake is a drummer living in New York.' />
-      </Card.Content>
-    </Card>
-
-    <Card>
-      <Card.Content
-        header='Elliot Baker'
-        meta='Friend'
-        description='Elliot is a music producer living in Chicago.'
-      />
     </Card>
 
   </Card.Group>
