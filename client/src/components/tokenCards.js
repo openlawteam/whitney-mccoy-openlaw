@@ -10,7 +10,9 @@ class TokenCards extends Component {
     web3: null, 
     accounts:'',
     tokenId:'',
-    allTokens:null
+    allTokens:null, 
+    myTokenList:[], 
+    tokenItems:null
   }
 
 componentDidMount = async () => {
@@ -42,31 +44,40 @@ updateCards = async(event)=>{
           console.log(error, allTokens);
           this.setState({allTokens});
         });
-
+//Loop over token index and get the token Ids
       var i; 
+      //const myTokenList = props.myTokenList;
+      const myTokenList = [];
 
       for(i=0; i < 5; i++){
         instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
           const tokenByIndexList = result.toString(10);
+          myTokenList.push(tokenByIndexList);
+          // this.setState({myTokenList});
+          // console.log('myTokenList', this.state.myTokenList);
           console.log(error, tokenByIndexList);
         });
 
       }
+      console.log('the array index to tokenId..', myTokenList);
+      
+      //const tokenItems = myTokenList.map((tokens) => <li>{tokens}</li>);
+     
 //CALL THESE METHODS FOR ALL TOKENS IN THE ARRAY < totalSupply
 
         //get the tokenID at an index position. 
         instance.methods.tokenByIndex(1).call({from: accounts[0]}, (error, result) =>{
           const tokenByIndexList = result.toString(10);
-          console.log(error, tokenByIndexList);
+          console.log(error, "token.."+tokenByIndexList);
         });
 
         //get owner of a token Id
         instance.methods.ownerOf(1).call({from: accounts[0]}, (error, result) =>{
-          console.log(error, result);
+          console.log(error,"owner.." + result);
         });
         //get token metadata
         instance.methods.tokenURI(1).call({from: accounts[0]}, (error, result) =>{
-          console.log(error, result);
+          console.log(error,"meta.." + result);
         });
   }catch(error){
     console.log('error updating cards', error)
@@ -75,7 +86,7 @@ updateCards = async(event)=>{
 
   render() {
     return(
-  
+  <Container>
    <Card.Group itemsPerRow={3}>
     <Card>
       <Card.Content>
@@ -103,6 +114,9 @@ updateCards = async(event)=>{
     </Card>
 
   </Card.Group>
+
+  
+  </Container>
 
 )
   }
