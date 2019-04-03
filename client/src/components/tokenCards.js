@@ -31,22 +31,25 @@ updateCards = async(event)=>{
           deployedNetwork && deployedNetwork.address,
         );
         this.setState({accounts, web3, instance});
-        //map this for each token that exists 
+       
+        //need list of all tokenIDs that exist 
+        instance.methods.tokenByIndex(1).call({from: accounts[0]}, (error, result) =>{
+          const tokenByIndexList = result.toString(10);
+          console.log(error, tokenByIndexList);
+        });
+
+        //map this for each tokenId that exists 
         instance.methods.ownerOf(1).call({from: accounts[0]}, (error, result) =>{
           console.log(error, result);
         });
-
+        //get token metadata
         instance.methods.tokenURI(1).call({from: accounts[0]}, (error, result) =>{
           console.log(error, result);
-        })
-
-
-
-
+        });
   }catch(error){
     console.log('error updating cards', error)
   }
-}
+}//updateCards
 
   render() {
     return(
