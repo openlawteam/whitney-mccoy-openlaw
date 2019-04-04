@@ -16,6 +16,7 @@ class TokenCards extends Component {
   }
 
 componentDidMount = async () => {
+ await this.getTotalSupply();
   this.updateCards();
 
 }
@@ -35,35 +36,29 @@ updateCards = async(event)=>{
           deployedNetwork && deployedNetwork.address,
         );
         this.setState({accounts, web3, instance});
-       
-        //need list of all tokenIDs that exist 
-      // instance.methods.totalSupply().call({from: accounts[0]}, (error, result) =>
-      //   {
-      //    //had to add resutl.toString() - all of sudden got bigNumber errors in react
-      //     const allTokens = result.toString(10);
-      //     console.log(error, allTokens);
-      //     this.setState({allTokens});
-      //   });
-      this.getTotalSupply();
-//Loop over token index and get the token Ids to make array of tokenIds
-      var i; 
-      //const myTokenList = props.myTokenList;  
+
+    //Loop over token index and get the token Ids to make array of tokenIds
+      //a counter variable
+      var i;
+      //get total supply of all tokenIDs that exist 
+      let tokenSupply =  this.state.allTokens;
+      //array to used to collect tokenId, owner address, and metadata
       const myTokenList = [];
-      //TODO change to 'allTokens', instead of hard code, 
-      for(i=0; i < 5; i++){
+      
+      for(i=0; i < tokenSupply; i++){
         instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
           const tokenByIndexList = result.toString(10);
 
           ///FELIPE SOLUTION
-//           let ownerAddress = await functionToGetOwner();
-// let propertyN = await functionToGetPropertyN();
-// myTokenList.push({
-// key: i,
-// tokenId: result.tokenId,
-// tokenMetadata: result.tokenMetadata,
-// owner: ownerAddress,
-// propertyN: propertyN
-// });
+          //           let ownerAddress = await functionToGetOwner();
+          // let propertyN = await functionToGetPropertyN();
+          // myTokenList.push({
+          // key: i,
+          // tokenId: result.tokenId,
+          // tokenMetadata: result.tokenMetadata,
+          // owner: ownerAddress,
+          // propertyN: propertyN
+          // });
 
           myTokenList.push(tokenByIndexList);
           // this.setState({myTokenList});
@@ -79,11 +74,11 @@ updateCards = async(event)=>{
      
 //CALL THESE METHODS FOR ALL TOKENS IN THE ARRAY < totalSupply
 
-        //get the tokenID at an index position. 
-        instance.methods.tokenByIndex(1).call({from: accounts[0]}, (error, result) =>{
-          const tokenByIndexList = result.toString(10);
-          console.log(error, "token.."+tokenByIndexList);
-        });
+        // //get the tokenID at an index position. 
+        // instance.methods.tokenByIndex(1).call({from: accounts[0]}, (error, result) =>{
+        //   const tokenByIndexList = result.toString(10);
+        //   console.log(error, "token.."+tokenByIndexList);
+        // });
 
         this.getOwnerAddress();
        
@@ -150,6 +145,8 @@ getTotalSupply= async(event)=>{
           const allTokens = result.toString(10);
           console.log(error, "totalSupply..."+ allTokens);
           this.setState({allTokens});
+
+         console.log("totalSupply2.." + this.state.allTokens);
         });
   } catch(error){console.log('get token metadata error', error)}
 }//getOwnerAddress
