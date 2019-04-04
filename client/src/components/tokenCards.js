@@ -65,6 +65,8 @@ updateCards = async(event)=>{
           // console.log('myTokenList', this.state.myTokenList);
           console.log(error, tokenByIndexList);
         }); //tokenByIndex call
+        this.getOwnerAddress(i);
+        this.getTokenMetaData(i);
       }//for loop
 
         console.log('the array index to tokenId..', myTokenList);
@@ -75,9 +77,9 @@ updateCards = async(event)=>{
         // TODO try giving these functions param 'i' to loop over
         this.getTokenByIndex(4);
 
-        this.getOwnerAddress();
+        this.getOwnerAddress(4);
        
-        this.getTokenMetaData();
+        this.getTokenMetaData(4);
   } //try
   catch(error){
     console.log('error updating cards', error)
@@ -85,7 +87,7 @@ updateCards = async(event)=>{
 }//updateCards
 
 /*Functions to use inside updateCards and loop over to push to myTokenList*/
-getOwnerAddress = async(event)=>{
+getOwnerAddress = async(Qoo)=>{
   try{
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
@@ -97,14 +99,14 @@ getOwnerAddress = async(event)=>{
           McCoyContract.abi,
           deployedNetwork && deployedNetwork.address,
         );
-      instance.methods.ownerOf(1).call({from: accounts[0]}, (error, result) =>{
+      instance.methods.ownerOf(Qoo).call({from: accounts[0]}, (error, result) =>{
           console.log(error,"owner.." + result);
         });
 
   } catch(error){console.log('get owner address error', error)}
 }//getOwnerAddress
 
-getTokenByIndex = async(Q)=>{
+getTokenByIndex = async(Qoo)=>{
     try{
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
@@ -116,7 +118,7 @@ getTokenByIndex = async(Q)=>{
           McCoyContract.abi,
           deployedNetwork && deployedNetwork.address,
         );
-      instance.methods.tokenByIndex(Q).call({from: accounts[0]}, (error, result) =>{
+      instance.methods.tokenByIndex(Qoo).call({from: accounts[0]}, (error, result) =>{
           console.log(error,"index.." + result);
         });
 
@@ -124,7 +126,7 @@ getTokenByIndex = async(Q)=>{
 
 }//getTokenByIndes
 
-getTokenMetaData = async(event)=>{
+getTokenMetaData = async(Qoo)=>{
   try{
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
@@ -136,7 +138,7 @@ getTokenMetaData = async(event)=>{
           McCoyContract.abi,
           deployedNetwork && deployedNetwork.address,
         );
-      instance.methods.tokenURI(1).call({from: accounts[0]}, (error, result) =>{
+      instance.methods.tokenURI(Qoo).call({from: accounts[0]}, (error, result) =>{
           console.log(error,"meta.." + result);
         });
 
