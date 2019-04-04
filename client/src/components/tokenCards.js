@@ -64,33 +64,30 @@ updateCards = async(event)=>{
           // this.setState({myTokenList});
           // console.log('myTokenList', this.state.myTokenList);
           console.log(error, tokenByIndexList);
+        }); //tokenByIndex call
+      }//for loop
 
-        });
-
-      }
-      console.log('the array index to tokenId..', myTokenList);
+        console.log('the array index to tokenId..', myTokenList);
       
-      //const tokenItems = myTokenList.map((tokens) => <li>{tokens}</li>);
-     
-//CALL THESE METHODS FOR ALL TOKENS IN THE ARRAY < totalSupply
-
-        // //get the tokenID at an index position. 
-        // instance.methods.tokenByIndex(1).call({from: accounts[0]}, (error, result) =>{
-        //   const tokenByIndexList = result.toString(10);
-        //   console.log(error, "token.."+tokenByIndexList);
-        // });
+        //const tokenItems = myTokenList.map((tokens) => <li>{tokens}</li>);
+             
+        // CALL THESE METHODS FOR ALL TOKENS IN THE ARRAY < totalSupply
+        // TODO try giving these functions param 'i' to loop over
+        this.getTokenByIndex(4);
 
         this.getOwnerAddress();
        
         this.getTokenMetaData();
-  }catch(error){
+  } //try
+  catch(error){
     console.log('error updating cards', error)
   }
 }//updateCards
 
+/*Functions to use inside updateCards and loop over to push to myTokenList*/
 getOwnerAddress = async(event)=>{
   try{
-            const web3 = await getWeb3();
+        const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
         console.log('update cards from ..',accounts[0]);
         const networkId = await web3.eth.net.getId();
@@ -106,6 +103,26 @@ getOwnerAddress = async(event)=>{
 
   } catch(error){console.log('get owner address error', error)}
 }//getOwnerAddress
+
+getTokenByIndex = async(Q)=>{
+    try{
+        const web3 = await getWeb3();
+        const accounts = await web3.eth.getAccounts();
+        console.log('update cards from ..',accounts[0]);
+        const networkId = await web3.eth.net.getId();
+        const deployedNetwork = McCoyContract.networks[networkId];
+
+        const instance = new web3.eth.Contract(
+          McCoyContract.abi,
+          deployedNetwork && deployedNetwork.address,
+        );
+      instance.methods.tokenByIndex(Q).call({from: accounts[0]}, (error, result) =>{
+          console.log(error,"index.." + result);
+        });
+
+  } catch(error){console.log('token index error..', error)}
+
+}//getTokenByIndes
 
 getTokenMetaData = async(event)=>{
   try{
@@ -166,7 +183,6 @@ getTotalSupply= async(event)=>{
     </Card>
 
   </Card.Group>
-
   
   </Container>
 
