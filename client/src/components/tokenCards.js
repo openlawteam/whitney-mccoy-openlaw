@@ -37,13 +37,14 @@ updateCards = async(event)=>{
         this.setState({accounts, web3, instance});
        
         //need list of all tokenIDs that exist 
-      instance.methods.totalSupply().call({from: accounts[0]}, (error, result) =>
-        {
-         //had to add resutl.toString() - all of sudden got bigNumber errors in react
-          const allTokens = result.toString(10);
-          console.log(error, allTokens);
-          this.setState({allTokens});
-        });
+      // instance.methods.totalSupply().call({from: accounts[0]}, (error, result) =>
+      //   {
+      //    //had to add resutl.toString() - all of sudden got bigNumber errors in react
+      //     const allTokens = result.toString(10);
+      //     console.log(error, allTokens);
+      //     this.setState({allTokens});
+      //   });
+      this.getTotalSupply();
 //Loop over token index and get the token Ids to make array of tokenIds
       var i; 
       //const myTokenList = props.myTokenList;  
@@ -84,18 +85,74 @@ updateCards = async(event)=>{
           console.log(error, "token.."+tokenByIndexList);
         });
 
-        //get owner of a token Id
-        instance.methods.ownerOf(1).call({from: accounts[0]}, (error, result) =>{
-          console.log(error,"owner.." + result);
-        });
-        //get token metadata
-        instance.methods.tokenURI(1).call({from: accounts[0]}, (error, result) =>{
-          console.log(error,"meta.." + result);
-        });
+        this.getOwnerAddress();
+       
+        this.getTokenMetaData();
   }catch(error){
     console.log('error updating cards', error)
   }
 }//updateCards
+
+getOwnerAddress = async(event)=>{
+  try{
+            const web3 = await getWeb3();
+        const accounts = await web3.eth.getAccounts();
+        console.log('update cards from ..',accounts[0]);
+        const networkId = await web3.eth.net.getId();
+        const deployedNetwork = McCoyContract.networks[networkId];
+
+        const instance = new web3.eth.Contract(
+          McCoyContract.abi,
+          deployedNetwork && deployedNetwork.address,
+        );
+      instance.methods.ownerOf(1).call({from: accounts[0]}, (error, result) =>{
+          console.log(error,"owner.." + result);
+        });
+
+  } catch(error){console.log('get owner address error', error)}
+}//getOwnerAddress
+
+getTokenMetaData = async(event)=>{
+  try{
+        const web3 = await getWeb3();
+        const accounts = await web3.eth.getAccounts();
+        console.log('update cards from ..',accounts[0]);
+        const networkId = await web3.eth.net.getId();
+        const deployedNetwork = McCoyContract.networks[networkId];
+
+        const instance = new web3.eth.Contract(
+          McCoyContract.abi,
+          deployedNetwork && deployedNetwork.address,
+        );
+      instance.methods.tokenURI(1).call({from: accounts[0]}, (error, result) =>{
+          console.log(error,"meta.." + result);
+        });
+
+  } catch(error){console.log('get token metadata error', error)}
+}//getOwnerAddress
+
+getTotalSupply= async(event)=>{
+  try{
+        const web3 = await getWeb3();
+        const accounts = await web3.eth.getAccounts();
+        console.log('update cards from ..',accounts[0]);
+        const networkId = await web3.eth.net.getId();
+        const deployedNetwork = McCoyContract.networks[networkId];
+
+        const instance = new web3.eth.Contract(
+          McCoyContract.abi,
+          deployedNetwork && deployedNetwork.address,
+        );
+
+        instance.methods.totalSupply().call({from: accounts[0]}, (error, result) =>
+        {
+         //had to add resutl.toString() - all of sudden got bigNumber errors in react
+          const allTokens = result.toString(10);
+          console.log(error, "totalSupply..."+ allTokens);
+          this.setState({allTokens});
+        });
+  } catch(error){console.log('get token metadata error', error)}
+}//getOwnerAddress
 
   render() {
     return(
