@@ -42,36 +42,37 @@ updateCards = async(event)=>{
       //get total supply of all tokenIDs that exist 
       let tokenSupply =  this.state.allTokens;
       //array to used to collect tokenId, owner address, and metadata
-      const myTokenList = [];
+       const myTokenList = [];
    
       for(i=0; i < tokenSupply; i++) {
 
-        // instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
-        //   const tokenId = result.toString(10);
+        let tokenId = await instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
+         // const tokenId = result.toString(10);
+          return result;
+          ///FELIPE SOLUTION
+          //           let ownerAddress = await functionToGetOwner();
+          // let propertyN = await functionToGetPropertyN();
+          // myTokenList.push({
+          // key: i,
+          // tokenId: result.tokenId,
+          // tokenMetadata: result.tokenMetadata,
+          // owner: ownerAddress,
+          // propertyN: propertyN
+          // });
 
-        //   ///FELIPE SOLUTION
-        //   //           let ownerAddress = await functionToGetOwner();
-        //   // let propertyN = await functionToGetPropertyN();
-        //   // myTokenList.push({
-        //   // key: i,
-        //   // tokenId: result.tokenId,
-        //   // tokenMetadata: result.tokenMetadata,
-        //   // owner: ownerAddress,
-        //   // propertyN: propertyN
-        //   // });
+        }); //tokenByIndex call
+        let ownerAddress = await instance.methods.ownerOf(i).call({from:accounts[0]}, (error, result) =>{
+          return result;
+        })
 
-        //   myTokenList.push(tokenId);
-        //   // this.setState({myTokenList});
-        //   // console.log('myTokenList', this.state.myTokenList);
-        //   console.log(error, tokenId);
-        // }); //tokenByIndex call
-        
-        let tokenId = this.getTokenByIndex(i);
-        let ownerAddress =  this.getOwnerAddress(i);
-        let tokenMetadata = this.getTokenMetaData(i);
-        //let tokenId =  await this.getTokenByIndex(i);
-        //let ownerAddress = await this.getOwnerAddress(i);
-        //let tokenMetaData =  await this.getTokenMetaData(i);
+       let tokenMetadata = await instance.methods.tokenURI(i).call({from:accounts[0]}, (error, result) =>{
+          return result;
+        })
+
+
+        // let tokenId = this.getTokenByIndex(i);
+        // let ownerAddress =  this.getOwnerAddress(i);
+        // let tokenMetadata = this.getTokenMetaData(i);
 
         myTokenList.push({
           key:i,
