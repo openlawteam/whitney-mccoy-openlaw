@@ -61,12 +61,7 @@ updateCards = async(event)=>{
           console.log(error, "")
           return result.toString();
         })
-
-
-        // let tokenId = this.getTokenByIndex(i);
-        // let ownerAddress =  this.getOwnerAddress(i);
-        // let tokenMetadata = this.getTokenMetaData(i);
-
+       //push values into myTokenList array
         myTokenList.push({
           key:i,
           tokenId: tokenId.toString(10),
