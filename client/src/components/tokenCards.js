@@ -52,6 +52,7 @@ updateCards = async(event)=>{
           return result.toString(10);
 
         }); //tokenByIndex call
+
         let ownerAddress = await instance.methods.ownerOf(tokenId).call({from:accounts[0]}, (error, result) =>{
           console.log(error, "eth.."+ result);
           return result.toString();
@@ -78,70 +79,6 @@ updateCards = async(event)=>{
     console.log('error updating cards', error)
   }
 }//updateCards
-
-/*Functions to use inside updateCards and loop over to push to myTokenList*/
-getOwnerAddress = async(Qoo)=>{
-  try{
-        const web3 = await getWeb3();
-        const accounts = await web3.eth.getAccounts();
-       // console.log('update cards from ..',accounts[0]);
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = McCoyContract.networks[networkId];
-
-        const instance = new web3.eth.Contract(
-          McCoyContract.abi,
-          deployedNetwork && deployedNetwork.address,
-        );
-      instance.methods.ownerOf(Qoo).call({from: accounts[0]}, (error, result) =>{
-          console.log(error,"owner.." + result);
-          //const ownerAddress = result;
-
-        });
-
-  } catch(error){console.log('get owner address error', error)}
-}//getOwnerAddress
-
-getTokenByIndex = async(Qoo)=>{
-    try{
-        const web3 = await getWeb3();
-        const accounts = await web3.eth.getAccounts();
-        //console.log('update cards from ..',accounts[0]);
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = McCoyContract.networks[networkId];
-
-        const instance = new web3.eth.Contract(
-          McCoyContract.abi,
-          deployedNetwork && deployedNetwork.address,
-        );
-      await instance.methods.tokenByIndex(Qoo).call({from: accounts[0]}, (error, result) =>{
-          console.log(error,"index.." + result);
-          const tokenId = result.toString(10);
-     
-        });
-
-  } catch(error){console.log('token index error..', error)}
-
-}//getTokenByIndes
-
-getTokenMetaData = async(Qoo)=>{
-  try{
-        const web3 = await getWeb3();
-        const accounts = await web3.eth.getAccounts();
-        //console.log('update cards from ..',accounts[0]);
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = McCoyContract.networks[networkId];
-
-        const instance = new web3.eth.Contract(
-          McCoyContract.abi,
-          deployedNetwork && deployedNetwork.address,
-        );
-      instance.methods.tokenURI(Qoo).call({from: accounts[0]}, (error, result) =>{
-          console.log(error,"meta.." + result);
-          //const metadata = result;
-        });
-
-  } catch(error){console.log('get token metadata error', error)}
-}//getOwnerAddress
 
 getTotalSupply= async(event)=>{
   try{
