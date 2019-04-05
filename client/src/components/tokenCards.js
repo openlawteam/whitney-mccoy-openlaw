@@ -3,7 +3,6 @@ import McCoyContract from "../contracts/McCoyContract.json";
 import getWeb3 from "../utils/getWeb3";
 import { Card, Table, Container } from 'semantic-ui-react'
 
-
 class TokenCards extends Component {
   state = {
     instance: null, 
@@ -16,7 +15,7 @@ class TokenCards extends Component {
   }
 
 componentDidMount = async () => {
- await this.getTotalSupply();
+  await this.getTotalSupply();
   this.updateCards();
 
 }
@@ -27,7 +26,7 @@ updateCards = async(event)=>{
       //connect to web3 and contract instance 
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
-        console.log('update cards from ..',accounts[0]);
+        //console.log('update cards from ..',accounts[0]);
         const networkId = await web3.eth.net.getId();
         const deployedNetwork = McCoyContract.networks[networkId];
 
@@ -38,38 +37,51 @@ updateCards = async(event)=>{
         this.setState({accounts, web3, instance});
 
     //Loop over token index and get the token Ids to make array of tokenIds
-      //a counter variable
+    //a counter variable
       var i;
       //get total supply of all tokenIDs that exist 
       let tokenSupply =  this.state.allTokens;
       //array to used to collect tokenId, owner address, and metadata
       const myTokenList = [];
-      
-      for(i=0; i < tokenSupply; i++){
-        instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
-          const tokenId = result.toString(10);
+   
+      for(i=0; i < tokenSupply; i++) {
 
-          ///FELIPE SOLUTION
-          //           let ownerAddress = await functionToGetOwner();
-          // let propertyN = await functionToGetPropertyN();
-          // myTokenList.push({
-          // key: i,
-          // tokenId: result.tokenId,
-          // tokenMetadata: result.tokenMetadata,
-          // owner: ownerAddress,
-          // propertyN: propertyN
-          // });
+        // instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
+        //   const tokenId = result.toString(10);
 
-          myTokenList.push(tokenId);
-          // this.setState({myTokenList});
-          // console.log('myTokenList', this.state.myTokenList);
-          console.log(error, tokenId);
-        }); //tokenByIndex call
-        this.getOwnerAddress(i);
-        this.getTokenMetaData(i);
+        //   ///FELIPE SOLUTION
+        //   //           let ownerAddress = await functionToGetOwner();
+        //   // let propertyN = await functionToGetPropertyN();
+        //   // myTokenList.push({
+        //   // key: i,
+        //   // tokenId: result.tokenId,
+        //   // tokenMetadata: result.tokenMetadata,
+        //   // owner: ownerAddress,
+        //   // propertyN: propertyN
+        //   // });
+
+        //   myTokenList.push(tokenId);
+        //   // this.setState({myTokenList});
+        //   // console.log('myTokenList', this.state.myTokenList);
+        //   console.log(error, tokenId);
+        // }); //tokenByIndex call
+        
+        let tokenId = this.getTokenByIndex(i);
+        let ownerAddress =  this.getOwnerAddress(i);
+        let tokenMetadata = this.getTokenMetaData(i);
+        //let tokenId =  await this.getTokenByIndex(i);
+        //let ownerAddress = await this.getOwnerAddress(i);
+        //let tokenMetaData =  await this.getTokenMetaData(i);
+
+        myTokenList.push({
+          key:i,
+          tokenId: tokenId,
+          tokenMetadata: tokenMetadata,
+          ownerAddress: ownerAddress
+        });
       }//for loop
-
-        console.log('the array index to tokenId..', myTokenList);
+        
+      console.log('the array index to tokenId..', myTokenList);
       
         //const tokenItems = myTokenList.map((tokens) => <li>{tokens}</li>);
   } //try
@@ -83,7 +95,7 @@ getOwnerAddress = async(Qoo)=>{
   try{
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
-        console.log('update cards from ..',accounts[0]);
+       // console.log('update cards from ..',accounts[0]);
         const networkId = await web3.eth.net.getId();
         const deployedNetwork = McCoyContract.networks[networkId];
 
@@ -93,6 +105,8 @@ getOwnerAddress = async(Qoo)=>{
         );
       instance.methods.ownerOf(Qoo).call({from: accounts[0]}, (error, result) =>{
           console.log(error,"owner.." + result);
+          //const ownerAddress = result;
+
         });
 
   } catch(error){console.log('get owner address error', error)}
@@ -102,7 +116,7 @@ getTokenByIndex = async(Qoo)=>{
     try{
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
-        console.log('update cards from ..',accounts[0]);
+        //console.log('update cards from ..',accounts[0]);
         const networkId = await web3.eth.net.getId();
         const deployedNetwork = McCoyContract.networks[networkId];
 
@@ -110,8 +124,10 @@ getTokenByIndex = async(Qoo)=>{
           McCoyContract.abi,
           deployedNetwork && deployedNetwork.address,
         );
-      instance.methods.tokenByIndex(Qoo).call({from: accounts[0]}, (error, result) =>{
+      await instance.methods.tokenByIndex(Qoo).call({from: accounts[0]}, (error, result) =>{
           console.log(error,"index.." + result);
+          const tokenId = result.toString(10);
+     
         });
 
   } catch(error){console.log('token index error..', error)}
@@ -122,7 +138,7 @@ getTokenMetaData = async(Qoo)=>{
   try{
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
-        console.log('update cards from ..',accounts[0]);
+        //console.log('update cards from ..',accounts[0]);
         const networkId = await web3.eth.net.getId();
         const deployedNetwork = McCoyContract.networks[networkId];
 
@@ -132,6 +148,7 @@ getTokenMetaData = async(Qoo)=>{
         );
       instance.methods.tokenURI(Qoo).call({from: accounts[0]}, (error, result) =>{
           console.log(error,"meta.." + result);
+          //const metadata = result;
         });
 
   } catch(error){console.log('get token metadata error', error)}
@@ -141,7 +158,7 @@ getTotalSupply= async(event)=>{
   try{
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
-        console.log('update cards from ..',accounts[0]);
+        //console.log('update cards from ..',accounts[0]);
         const networkId = await web3.eth.net.getId();
         const deployedNetwork = McCoyContract.networks[networkId];
 
@@ -154,7 +171,7 @@ getTotalSupply= async(event)=>{
         {
          //had to add resutl.toString() - all of sudden got bigNumber errors in react
           const allTokens = result.toString(10);
-          console.log(error, "totalSupply..."+ allTokens);
+          //console.log(error, "totalSupply..."+ allTokens);
           this.setState({allTokens});
 
          console.log("totalSupply2.." + this.state.allTokens);
