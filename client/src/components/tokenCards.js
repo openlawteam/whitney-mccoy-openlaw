@@ -45,21 +45,21 @@ updateCards = async(event)=>{
        const myTokenList = [];
    
       for(i=0; i < tokenSupply; i++) {
-
+        //get the tokenId from the index #
         let tokenId = await instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
          // const tokenId = result.toString(10);
-         console.log(error, result.toString(10));
+         //console.log(error, result.toString(10));
           return result.toString(10);
-
         }); //tokenByIndex call
 
+        //use the tokenId to get its owner's Eth address
         let ownerAddress = await instance.methods.ownerOf(tokenId).call({from:accounts[0]}, (error, result) =>{
-          console.log(error, "eth.."+ result);
+          //console.log(error, "eth.."+ result);
           return result.toString();
         })
-
+         //use the tokenId to get its Metadata
        let tokenMetadata = await instance.methods.tokenURI(tokenId).call({from:accounts[0]}, (error, result) =>{
-          console.log(error, "")
+          //console.log(error, "")
           return result.toString();
         })
        //push values into myTokenList array
