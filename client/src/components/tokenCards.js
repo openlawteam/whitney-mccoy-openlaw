@@ -56,28 +56,28 @@ updateCards = async()=>{
       
       for(i=0; i < tokenSupply; i++) {
 
-        // instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
-        //   const tokenId = result.toString(10);
-        //   myTokenList.push(tokenId);
-        // }); //tokenByIndex call
+        instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
+          const tokenId = result.toString(10);
+          myTokenList.push(tokenId);
+        }); //tokenByIndex call
 
         //?? PROBLEM - can't use await to resolve promises ??
         // let tokenId = this.getTokenByIndex(i);
         // let ownerAddress =  this.getOwnerAddress(i);
         // let tokenMetaData = this.getTokenMetaData(i);
 
-        let tokenId =  await this.getTokenByIndex(i);
-        console.log("trying...",tokenId);
-        let ownerAddress = await this.getOwnerAddress(i);
-        let tokenMetaData =  await this.getTokenMetaData(i);
+        // let tokenId =  await this.getTokenByIndex(i);
+        // console.log("trying...",tokenId);
+        // let ownerAddress = await this.getOwnerAddress(i);
+        // let tokenMetaData =  await this.getTokenMetaData(i);
 
-        //pust results to array myTokenList
-        myTokenList.push({
-          key:i,
-          tokenId: tokenId,
-          tokenMetadata: tokenMetaData,
-          ownerAddress: ownerAddress
-        });
+        // //pust results to array myTokenList
+        // myTokenList.push({
+        //   key:i,
+        //   tokenId: tokenId,
+        //   tokenMetadata: tokenMetaData,
+        //   ownerAddress: ownerAddress
+        // });
 
       }//for loop
         
