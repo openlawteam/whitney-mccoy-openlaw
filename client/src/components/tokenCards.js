@@ -67,6 +67,7 @@ updateCards = async()=>{
         // let tokenMetaData = this.getTokenMetaData(i);
 
         let tokenId =  await this.getTokenByIndex(i);
+        console.log("trying...",tokenId);
         let ownerAddress = await this.getOwnerAddress(i);
         let tokenMetaData =  await this.getTokenMetaData(i);
 
@@ -103,7 +104,7 @@ getOwnerAddress = async(Qoo)=>{
       instance.methods.ownerOf(Qoo).call({from: accounts[0]}, (error, result) =>{
           console.log(error,"owner.." + result);
           const ownerAddress = result;
-
+          return ownerAddress;
         });
 
   } catch(error){console.log('get owner address error', error)}
@@ -124,6 +125,7 @@ getTokenByIndex = async(Qoo)=>{
       await instance.methods.tokenByIndex(Qoo).call({from: accounts[0]}, (error, result) =>{
           console.log(error,"index.." + result);
           const tokenId = result.toString(10);
+          return tokenId;
      
         });
 
@@ -146,6 +148,7 @@ getTokenMetaData = async(Qoo)=>{
       instance.methods.tokenURI(Qoo).call({from: accounts[0]}, (error, result) =>{
           console.log(error,"meta.." + result);
           const tokenMetaData = result;
+          return tokenMetaData;
         });
 
   } catch(error){console.log('get token metadata error', error)}
