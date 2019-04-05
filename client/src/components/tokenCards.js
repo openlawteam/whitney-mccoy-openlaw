@@ -48,25 +48,18 @@ updateCards = async(event)=>{
 
         let tokenId = await instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
          // const tokenId = result.toString(10);
-          return result;
-          ///FELIPE SOLUTION
-          //           let ownerAddress = await functionToGetOwner();
-          // let propertyN = await functionToGetPropertyN();
-          // myTokenList.push({
-          // key: i,
-          // tokenId: result.tokenId,
-          // tokenMetadata: result.tokenMetadata,
-          // owner: ownerAddress,
-          // propertyN: propertyN
-          // });
+         console.log(error, result.toString(10));
+          return result.toString(10);
 
         }); //tokenByIndex call
-        let ownerAddress = await instance.methods.ownerOf(i).call({from:accounts[0]}, (error, result) =>{
-          return result;
+        let ownerAddress = await instance.methods.ownerOf(tokenId).call({from:accounts[0]}, (error, result) =>{
+          console.log(error, "eth.."+ result);
+          return result.toString();
         })
 
-       let tokenMetadata = await instance.methods.tokenURI(i).call({from:accounts[0]}, (error, result) =>{
-          return result;
+       let tokenMetadata = await instance.methods.tokenURI(tokenId).call({from:accounts[0]}, (error, result) =>{
+          console.log(error, "")
+          return result.toString();
         })
 
 
@@ -76,7 +69,7 @@ updateCards = async(event)=>{
 
         myTokenList.push({
           key:i,
-          tokenId: tokenId,
+          tokenId: tokenId.toString(10),
           tokenMetadata: tokenMetadata,
           ownerAddress: ownerAddress
         });
