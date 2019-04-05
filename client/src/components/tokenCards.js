@@ -47,7 +47,7 @@ updateCards = async(event)=>{
       
       for(i=0; i < tokenSupply; i++){
         instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
-          const tokenByIndexList = result.toString(10);
+          const tokenId = result.toString(10);
 
           ///FELIPE SOLUTION
           //           let ownerAddress = await functionToGetOwner();
@@ -60,10 +60,10 @@ updateCards = async(event)=>{
           // propertyN: propertyN
           // });
 
-          myTokenList.push(tokenByIndexList);
+          myTokenList.push(tokenId);
           // this.setState({myTokenList});
           // console.log('myTokenList', this.state.myTokenList);
-          console.log(error, tokenByIndexList);
+          console.log(error, tokenId);
         }); //tokenByIndex call
         this.getOwnerAddress(i);
         this.getTokenMetaData(i);
@@ -72,14 +72,6 @@ updateCards = async(event)=>{
         console.log('the array index to tokenId..', myTokenList);
       
         //const tokenItems = myTokenList.map((tokens) => <li>{tokens}</li>);
-             
-        // CALL THESE METHODS FOR ALL TOKENS IN THE ARRAY < totalSupply
-        // TODO try giving these functions param 'i' to loop over
-        this.getTokenByIndex(4);
-
-        this.getOwnerAddress(4);
-       
-        this.getTokenMetaData(4);
   } //try
   catch(error){
     console.log('error updating cards', error)
