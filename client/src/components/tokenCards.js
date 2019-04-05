@@ -17,10 +17,9 @@ class TokenCards extends Component {
 componentDidMount = async () => {
   await this.getTotalSupply();
   this.updateCards();
-
 }
 
-updateCards = async(event)=>{
+updateCards = async()=>{
   console.log('updating cards..');
   try{
       //connect to web3 and contract instance 
@@ -43,47 +42,45 @@ updateCards = async(event)=>{
       let tokenSupply =  this.state.allTokens;
       //array to used to collect tokenId, owner address, and metadata
       const myTokenList = [];
-   
+
+          // FELIPE SOLUTION
+          // let ownerAddress = await functionToGetOwner();
+          // let propertyN = await functionToGetPropertyN();
+          // myTokenList.push({
+          // key: i,
+          // tokenId: result.tokenId,
+          // tokenMetadata: result.tokenMetadata,
+          // owner: ownerAddress,
+          // propertyN: propertyN
+          // });
+      
       for(i=0; i < tokenSupply; i++) {
 
         // instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
         //   const tokenId = result.toString(10);
-
-        //   ///FELIPE SOLUTION
-        //   //           let ownerAddress = await functionToGetOwner();
-        //   // let propertyN = await functionToGetPropertyN();
-        //   // myTokenList.push({
-        //   // key: i,
-        //   // tokenId: result.tokenId,
-        //   // tokenMetadata: result.tokenMetadata,
-        //   // owner: ownerAddress,
-        //   // propertyN: propertyN
-        //   // });
-
         //   myTokenList.push(tokenId);
-        //   // this.setState({myTokenList});
-        //   // console.log('myTokenList', this.state.myTokenList);
-        //   console.log(error, tokenId);
         // }); //tokenByIndex call
-        
+
+        //?? PROBLEM - can't use await to resolve promises ??
         let tokenId = this.getTokenByIndex(i);
         let ownerAddress =  this.getOwnerAddress(i);
         let tokenMetadata = this.getTokenMetaData(i);
-        //let tokenId =  await this.getTokenByIndex(i);
-        //let ownerAddress = await this.getOwnerAddress(i);
-        //let tokenMetaData =  await this.getTokenMetaData(i);
 
+        // // let tokenId =  await this.getTokenByIndex();
+        // // let ownerAddress = await this.getOwnerAddress();
+        // // let tokenMetaData =  await this.getTokenMetaData();
+
+        //pust results to array myTokenList
         myTokenList.push({
           key:i,
           tokenId: tokenId,
           tokenMetadata: tokenMetadata,
           ownerAddress: ownerAddress
         });
+
       }//for loop
         
-      console.log('the array index to tokenId..', myTokenList);
-      
-        //const tokenItems = myTokenList.map((tokens) => <li>{tokens}</li>);
+      console.log('the array index to tokenId..', myTokenList);            
   } //try
   catch(error){
     console.log('error updating cards', error)
@@ -148,7 +145,7 @@ getTokenMetaData = async(Qoo)=>{
         );
       instance.methods.tokenURI(Qoo).call({from: accounts[0]}, (error, result) =>{
           console.log(error,"meta.." + result);
-          //const metadata = result;
+          const tokenMetadata = result;
         });
 
   } catch(error){console.log('get token metadata error', error)}
