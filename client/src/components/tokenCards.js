@@ -73,9 +73,15 @@ updateCards = async(event)=>{
         //this.setState({myTokenList});
       console.log('the array index to tokenId..', myTokenList);
       const listItems = myTokenList.map((tokens)=>
-        <li key={tokens.tokenid}>
-          {tokens.owneraddress}
-        </li>
+        <Card key={tokens.tokenid}>
+          <Card.Content>
+          <Card.Header>{tokens.tokenid}</Card.Header>
+         
+          <Card.Meta>{tokens.owneraddress}</Card.Meta>
+          <Card.Description>{tokens.metadata}</Card.Description>
+          </Card.Content>
+        </Card>
+       
       )
       this.setState({listItems});
         //const tokenItems = myTokenList.map((tokens) => <li>{tokens}</li>);
@@ -125,7 +131,8 @@ getTotalSupply= async(event)=>{
     </Card>
 
   </Card.Group>
-  <ul>{this.state.listItems}</ul>
+
+  <Card.Group>{this.state.listItems}</Card.Group>
   </Container>
 
 )
