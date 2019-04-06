@@ -74,7 +74,7 @@ updateCards = async(event)=>{
       console.log('the array index to tokenId..', myTokenList);
       const listItems = myTokenList.map((tokens)=>
         <li key={tokens.tokenid}>
-          {this.props.tokens}
+          {tokens.owneraddress}
         </li>
       )
       this.setState({listItems});
