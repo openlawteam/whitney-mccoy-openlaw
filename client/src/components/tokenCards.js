@@ -75,10 +75,9 @@ updateCards = async(event)=>{
       const listItems = myTokenList.map((tokens)=>
         <Card key={tokens.tokenid}>
           <Card.Content>
-          <Card.Header>{tokens.tokenid}</Card.Header>
-         
-          <Card.Meta>{tokens.owneraddress}</Card.Meta>
-          <Card.Description>{tokens.metadata}</Card.Description>
+            <Card.Header>Token ID: {tokens.tokenid}</Card.Header>
+            <Card.Meta>{tokens.owneraddress}</Card.Meta>
+            <Card.Description className = "wee">{tokens.tokenid}</Card.Description>
           </Card.Content>
         </Card>
        
@@ -119,20 +118,9 @@ getTotalSupply= async(event)=>{
   render() {
     return(
   <Container>
-  <h3> token list </h3>
-   <Card.Group itemsPerRow={3}>
-    <Card>
-      <Card.Content>
-        <Card.Header>Token Id 1</Card.Header>
-        <Card.Meta>meta data of token</Card.Meta>
-         <Card.Description>0xad9b86640008f02d9f2f3f0702133cea4eecb18c</Card.Description>
-        <Card.Meta>Current Donor</Card.Meta>
-      </Card.Content>
-    </Card>
+  <h3> Token List </h3>
 
-  </Card.Group>
-
-  <Card.Group>{this.state.listItems}</Card.Group>
+  <Card.Group itemsPerRow={2}>{this.state.listItems}</Card.Group>
   </Container>
 
 )
