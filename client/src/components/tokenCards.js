@@ -72,6 +72,7 @@ updateCards = async(event)=>{
       }//for loop
         //this.setState({myTokenList});
       console.log('the array index to tokenId..', myTokenList);
+     //map array to an element
       const listItems = myTokenList.map((tokens)=>
         <Card key={tokens.key}>
           <Card.Content>
@@ -79,11 +80,10 @@ updateCards = async(event)=>{
             <Card.Meta>{tokens.metadata}</Card.Meta>
             <Card.Description className = "wee">{tokens.owneraddress}</Card.Description>
           </Card.Content>
-        </Card>
-       
+        </Card>  
       )
       this.setState({listItems});
-        //const tokenItems = myTokenList.map((tokens) => <li>{tokens}</li>);
+       
   } //try
   catch(error){
     console.log('error updating cards', error)
