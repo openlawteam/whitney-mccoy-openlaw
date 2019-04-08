@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Form, Button, Checkbox }from 'semantic-ui-react';
+import { Container, Grid, Form, Button }from 'semantic-ui-react';
 import { APIClient, Openlaw } from 'openlaw';
 import OpenLawForm from 'openlaw-elements';
 import 'openlaw-elements/dist/openlaw-elements.min.css';
@@ -55,22 +55,6 @@ class ApplyForToken extends Component {
     try{
       this.update();
 
-   //    const myCompiledTemplate = await Openlaw.compileTemplate(myContent);
-   //    this.setState({myCompiledTemplate});
-   //    console.log("my compiled template..." + myCompiledTemplate);
-
-   //    const parameters = this.state.parameters;
-   //    console.log("parameters.." + parameters);
-   //    this.setState({parameters});
-   //    const executionResult = await Openlaw.execute(this.state.myCompiledTemplate, {}, this.state.parameters);
-   //    console.log("ex result.." + executionResult);
-   //    // this.setState({executionResult});
-   //    // const variables = await Openlaw.getExecutedVariables(this.state.executionResult,{});
-   //    // this.setState({variables});
-   //    // console.log("execute.." + this.state.variables, this.state.executionResult);
-   // // //pull properties off of JSON and make into variables
-   // //  const myTitle = myTemplate.title;
-
     } catch(error){
       console.log('errors..', error);
     }
@@ -81,9 +65,9 @@ class ApplyForToken extends Component {
       const myTemplate = await apiClient.getTemplate(openLawConfig.templateName);
       this.setState({myTemplate});   
       const myContent = myTemplate.content; 
-      console.log(myTemplate.content);
+      //console.log(myTemplate.content);
 
-          const updatedDraftParameters = key
+      const updatedDraftParameters = key
       ? ({
         ...this.state.parameters,
         [key]: value,
@@ -117,12 +101,20 @@ class ApplyForToken extends Component {
 
       return state;
     });
-     // const myCompiledTemplate = await Openlaw.compileTemplate(myContent);
-  }
+
+  } //update function
+
+sendDraft=(event)=>{
+  event.preventDefault()
+  console.log(this.state.parameters);
+}
 
   render() {
     return(
     <Container>
+    <Grid>
+    <Grid.Row>
+      <Grid.Column width ={10}>
       <h2>powered by openlaw</h2>
       {Object.keys(this.state.executionResult).length && (
         <OpenLawForm
@@ -134,6 +126,19 @@ class ApplyForToken extends Component {
           variables={this.state.variables}
         /> 
     )}
+      <Button
+      onClick={this.sendDraft}
+      >Send Draft
+      </Button>
+      </Grid.Column>
+      <Grid.Column width ={6}>
+
+      <h2>Preview</h2>
+    <Button>Click to Preview</Button>
+
+      </Grid.Column>
+      </Grid.Row>
+      </Grid>
     </Container>
     )
   }//render 
