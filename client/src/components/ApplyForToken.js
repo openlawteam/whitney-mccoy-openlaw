@@ -57,10 +57,10 @@ class ApplyForToken extends Component {
 
     } catch(error){
       console.log('errors..', error);
-    }
-    
-  }
-  update = async (key, value) => {
+    }   
+  } //componentDidMount
+
+update = async (key, value) => {
       console.log('updates..');
       const myTemplate = await apiClient.getTemplate(openLawConfig.templateName);
       this.setState({myTemplate});   
@@ -104,11 +104,18 @@ class ApplyForToken extends Component {
 
   } //update function
 
-sendDraft=(event)=>{
+
+
+sendDraft= async (event)=>{
   console.log('sending draft..');
   event.preventDefault()
   console.log(this.state.parameters);
-}
+
+  const uploadParams = await this.buildOpenLawParamsObj(this.state.myTemplate,'michael.chan@consensys.net');
+  const draftId = await apiClient.uploadDraft(uploadParams);
+  console.log('draft id..', draftId);
+  this.setState({draftId});
+} //sendDraft
 
 renderPreview = async (event)=> {
   console.log('preview...');
@@ -117,7 +124,56 @@ renderPreview = async (event)=> {
   const previewHtml = await Openlaw.renderForReview(agreement, {},{});
   //console.log(previewHtml);
   this.setState({previewHtml});
-}
+} //renderPreview
+
+/*HELPERS*/
+/*converts an email address into an object, to be used with uploadDraft
+or upLoadContract methods from the APIClient.
+Eventually this function will no longer be needed. */
+convertUserObject = (original) => {
+    const object = {
+      id: {
+        id: original.id
+      },
+      email: original.email,
+      identifiers: [
+        {
+          identityProviderId: "openlaw",
+          identifier: original.identifiers[0].id
+        }
+      ]
+    }
+    return object;
+  }
+
+  /*Build Open Law Params to Submit for Upload Contract*/
+  buildOpenLawParamsObj = async (myTemplate, creatorId) => {
+
+    //const sellerUser = await apiClient.getUserDetails(this.state.sellerEmail);
+    //const buyerUser = await apiClient.getUserDetails(this.state.buyerEmail);
+
+    const object = {
+      templateId: myTemplate.id,
+      title: myTemplate.title,
+      text: myTemplate.content,
+      creator: this.state.creatorId,
+      // parameters: {
+      //   "Seller Address": this.state.seller,
+      //   "Buyer Address": this.state.buyer,
+      //   "Purchased Item": this.state.descr,
+      //   "Purchase Price": this.state.price,
+      //   "Seller Signatory Email": JSON.stringify(this.convertUserObject(sellerUser)),
+      //   "Buyer Signatory Email": JSON.stringify(this.convertUserObject(buyerUser)),
+      // },
+      parameters: this.state.parameters,
+      overriddenParagraphs: {},
+      agreements: {},
+      readonlyEmails: [],
+      editEmails: [],
+      draftId: this.state.draftId
+    };
+    return object;
+  };
 
   render() {
     return(
