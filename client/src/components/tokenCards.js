@@ -60,13 +60,13 @@ updateCards = async(event)=>{
          //use the tokenId to get its Metadata
        let tokenMetadata = await instance.methods.tokenURI(tokenId).call({from:accounts[0]}, (error, result) =>{
           //console.log(error, "")
-          return result.toString();
+          return result;
         })
        //push values into myTokenList array
         myTokenList.push({
           key:i,
           tokenid: tokenId.toString(10),
-          tokenmetadata: tokenMetadata,
+          tokenuri: tokenMetadata,
           owneraddress: ownerAddress
         });
       }//for loop
@@ -77,8 +77,8 @@ updateCards = async(event)=>{
         <Card key={tokens.key}>
           <Card.Content>
             <Card.Header>Token ID: {tokens.tokenid}</Card.Header>
-            <Card.Meta>{tokens.metadata}</Card.Meta>
-            <Card.Description className = "wee">{tokens.owneraddress}</Card.Description>
+            <Card.Meta>Meta: {tokens.tokenuri}</Card.Meta>
+            <Card.Description className = "wee">Owner:{tokens.owneraddress}</Card.Description>
           </Card.Content>
         </Card>  
       )
