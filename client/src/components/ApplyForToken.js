@@ -105,8 +105,18 @@ class ApplyForToken extends Component {
   } //update function
 
 sendDraft=(event)=>{
+  console.log('sending draft..');
   event.preventDefault()
   console.log(this.state.parameters);
+}
+
+renderPreview = async (event)=> {
+  console.log('preview...');
+  event.preventDefault();
+  const {agreement} = Openlaw.getAgreements(this.state.executionResult)[0];
+  const previewHtml = await Openlaw.renderForReview(agreement, {},{});
+  //console.log(previewHtml);
+  this.setState({previewHtml});
 }
 
   render() {
@@ -134,7 +144,10 @@ sendDraft=(event)=>{
       <Grid.Column width ={6}>
 
       <h2>Preview</h2>
-    <Button>Click to Preview</Button>
+      <div dangerouslySetInnerHTML={{__html: this.state.previewHtml}} />
+    <Button
+      onClick={this.renderPreview}
+    >Click to Preview</Button>
 
       </Grid.Column>
       </Grid.Row>
