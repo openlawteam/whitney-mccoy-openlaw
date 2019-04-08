@@ -70,6 +70,8 @@ class ApplyForToken extends Component {
           <label>Email</label>
           <input placeholder='Email' required/>
         </Form.Field>
+        <Form.Field label='Yes, Ethereum Address' control='input' type='radio' name='htmlRadios' />
+        <Form.Field label='No' control='input' type='radio' name='htmlRadios' />
         <Form.Field>
           <label>My Ethereum Address</label>
           <input placeholder='My Ethereum Address' />
