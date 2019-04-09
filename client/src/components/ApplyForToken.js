@@ -107,8 +107,8 @@ update = async (key, value) => {
 sendDraft= async (event)=>{
   console.log('sending draft..');
   event.preventDefault()
-  console.log(this.state.parameters);
-
+  //console.log(this.state.parameters);
+  //upload params, myTemplate, and creatorId
   const uploadParams = await this.buildOpenLawParamsObj(this.state.myTemplate,'michael.chan@consensys.net');
   const draftId = await apiClient.uploadDraft(uploadParams);
   console.log('draft id..', draftId);
@@ -128,28 +128,27 @@ renderPreview = async (event)=> {
 /*converts an email address into an object, to be used with uploadDraft
 or upLoadContract methods from the APIClient.
 Eventually this function will no longer be needed. */
-convertUserObject = (original) => {
-    const object = {
-      id: {
-        id: original.id
-      },
-      email: original.email,
-      identifiers: [
-        {
-         identityProviderId: "openlaw",
-         identifier: original.identifiers[0].id
-        }
-      ]
-    }
-    return object;
-  }
+// convertUserObject = (original) => {
+//     const object = {
+//       id: {
+//         id: original.id
+//       },
+//       email: original.email,
+//       identifiers: [
+//         {
+//          identityProviderId: "openlaw",
+//          identifier: original.identifiers[0].id
+//         }
+//       ]
+//     }
+//     return object;
+//   }
 
   /*Build Open Law Params to Submit for Upload Contract*/
   buildOpenLawParamsObj = async (myTemplate, creatorId) => {
-    console.log(this.state.parameters['Artist Signatory Email']);
-    const artistUser = await apiClient.getUserDetails(this.state.parameters['Artist Signatory Email']);
-    
-    const donorUser = await apiClient.getUserDetails(this.state.parameters['Donor Signatory Email']);
+    //console.log(this.state.parameters['Artist Signatory Email']);
+    //const artistUser = await apiClient.getUserDetails(this.state.parameters['Artist Signatory Email']); 
+    //const donorUser = await apiClient.getUserDetails(this.state.parameters['Donor Signatory Email']);
 
     const object = {
       templateId: myTemplate.id,
