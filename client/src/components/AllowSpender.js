@@ -62,14 +62,14 @@ render() {
   <Form onSubmit = {this.allowTokenSpender}>
     <Form.Field>
       <label>Token Id</label>
-      <input placeholder='Ethereum Address'
+      <input placeholder='Token ID'
         value = {this.state.tokenId}
         onChange = {event => this.setState({tokenId: event.target.value})}
        />
     </Form.Field>
     <Form.Field>
       <label>Ethereum Address of Spender</label>
-      <input placeholder='Token Number' 
+      <input placeholder='Ethereum Address of Spender' 
         value = {this.state.spenderEthereumAddress}
           onChange = {event => this.setState({spenderEthereumAddress: event.target.value})}
       />

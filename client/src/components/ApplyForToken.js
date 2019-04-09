@@ -136,7 +136,6 @@ convertUserObject = (original) => {
       email: original.email,
       identifiers: [
         {
-          identityProviderId: "openlaw",
          identityProviderId: "openlaw",
          identifier: original.identifiers[0].id
         }
@@ -147,15 +146,16 @@ convertUserObject = (original) => {
 
   /*Build Open Law Params to Submit for Upload Contract*/
   buildOpenLawParamsObj = async (myTemplate, creatorId) => {
-
-    //const artistUser = await apiClient.getUserDetails(this.state.parameters['Artist Signatory Email']);
-    //const donorUser = await apiClient.getUserDetails(this.state.parameters['Donor Signatory Email']);
+    console.log(this.state.parameters['Artist Signatory Email']);
+    const artistUser = await apiClient.getUserDetails(this.state.parameters['Artist Signatory Email']);
+    
+    const donorUser = await apiClient.getUserDetails(this.state.parameters['Donor Signatory Email']);
 
     const object = {
       templateId: myTemplate.id,
       title: myTemplate.title,
       text: myTemplate.content,
-      creator: this.state.creatorId,
+      creator: creatorId,
       parameters: {
         "Artist Ethereum Address": this.state.parameters['Artist Ethereum Address'],
         "Donor Name": this.state.parameters['Donor Name'],
