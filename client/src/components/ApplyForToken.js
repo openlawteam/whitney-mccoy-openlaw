@@ -104,8 +104,6 @@ update = async (key, value) => {
 
   } //update function
 
-
-
 sendDraft= async (event)=>{
   console.log('sending draft..');
   event.preventDefault()
@@ -139,7 +137,8 @@ convertUserObject = (original) => {
       identifiers: [
         {
           identityProviderId: "openlaw",
-          identifier: original.identifiers[0].id
+         identityProviderId: "openlaw",
+         identifier: original.identifiers[0].id
         }
       ]
     }
@@ -149,23 +148,25 @@ convertUserObject = (original) => {
   /*Build Open Law Params to Submit for Upload Contract*/
   buildOpenLawParamsObj = async (myTemplate, creatorId) => {
 
-    //const sellerUser = await apiClient.getUserDetails(this.state.sellerEmail);
-    //const buyerUser = await apiClient.getUserDetails(this.state.buyerEmail);
+    //const artistUser = await apiClient.getUserDetails(this.state.parameters['Artist Signatory Email']);
+    //const donorUser = await apiClient.getUserDetails(this.state.parameters['Donor Signatory Email']);
 
     const object = {
       templateId: myTemplate.id,
       title: myTemplate.title,
       text: myTemplate.content,
       creator: this.state.creatorId,
-      // parameters: {
-      //   "Seller Address": this.state.seller,
-      //   "Buyer Address": this.state.buyer,
-      //   "Purchased Item": this.state.descr,
-      //   "Purchase Price": this.state.price,
-      //   "Seller Signatory Email": JSON.stringify(this.convertUserObject(sellerUser)),
-      //   "Buyer Signatory Email": JSON.stringify(this.convertUserObject(buyerUser)),
-      // },
-      parameters: this.state.parameters,
+      parameters: {
+        "Artist Ethereum Address": this.state.parameters['Artist Ethereum Address'],
+        "Donor Name": this.state.parameters['Donor Name'],
+        "Recipient Ethereum Address": this.state.parameters['Recipient Ethereum Address'],
+        "Token Id": this.state.parameters['Token Id'],
+        "Donor Signatory Email": this.state.parameters['Donor Signatory Email'],
+        "Artist Signatory Email": this.state.parameters['Artist Signatory Email'],
+        // "Artist Signatory Email": JSON.stringify(this.convertUserObject(artistUser)),
+        // "Donor Signatory Email": JSON.stringify(this.convertUserObject(donorUser)),
+      },
+      //parameters: this.state.parameters,
       overriddenParagraphs: {},
       agreements: {},
       readonlyEmails: [],
