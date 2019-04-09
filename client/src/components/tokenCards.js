@@ -76,6 +76,9 @@ updateCards = async(event)=>{
       const listItems = myTokenList.map((tokens)=>
         <Card key={tokens.key}>
           <Card.Content>
+          <a href = {'https://rinkeby.etherscan.io/token/0x504dba74322ced2a1f32f460fa92882b746064e5?a='+ tokens.tokenid} 
+              target="_blank"
+          >Tx History</a>
             <Card.Header>Token ID: {tokens.tokenid}</Card.Header>
             <Card.Meta>Meta: {tokens.tokenuri}</Card.Meta>
             <Card.Description className = "wee">Owner:{tokens.owneraddress}</Card.Description>

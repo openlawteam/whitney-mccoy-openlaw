@@ -181,7 +181,7 @@ Eventually this function will no longer be needed. */
     <Grid>
     <Grid.Row>
       <Grid.Column width ={10}>
-      <h2>powered by openlaw</h2>
+      <h2>Powered by Openlaw</h2>
       {Object.keys(this.state.executionResult).length && (
         <OpenLawForm
           apiClient={apiClient}
