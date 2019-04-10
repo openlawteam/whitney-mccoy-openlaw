@@ -54,7 +54,7 @@ class MintToken extends Component {
           {from: accounts[0]}, (error, txHash) =>{
               console.log(error, txHash);
           });
-           this.setState({successMessage: 'ART NFT Created!'});
+           this.setState({successMessage: 'ART Token Created!'});
     } //try
     catch(error) {
       this.setState({errorMessage:error.message});
