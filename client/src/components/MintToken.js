@@ -67,6 +67,7 @@ class MintToken extends Component {
 
     return (
       <Segment color = 'teal'>
+      <h2>Mint New Token</h2>
       <Form onSubmit = {this.mintToken}
             success={!!this.state.successMessage}
             error={!!this.state.errorMessage}>

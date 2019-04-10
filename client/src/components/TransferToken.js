@@ -47,6 +47,7 @@ class TransferTokenForm extends Component {
    render() {
     return(
         <Segment color = 'orange'>
+        <h2>Transfer Token </h2>
           <Form onSubmit = {this.transferToken}>
             <Form.Field>
               <label>My Ethereum Address</label>

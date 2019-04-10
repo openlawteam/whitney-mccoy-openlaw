@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Grid, Form, Button }from 'semantic-ui-react';
+import { Container, Grid, Form, Button, Message }from 'semantic-ui-react';
 import { APIClient, Openlaw } from 'openlaw';
 import OpenLawForm from 'openlaw-elements';
 import 'openlaw-elements/dist/openlaw-elements.min.css';
@@ -47,7 +47,9 @@ class ApplyForToken extends Component {
     variables:[],
     donorName:'',
     donorEmail:'',
-    donorEthAddress:null
+    donorEthAddress:null,
+     errorMessage:'',
+    successMessage: 'free'
   };
 
   componentDidMount = async() => {
@@ -182,6 +184,8 @@ Eventually this function will no longer be needed. */
     <Grid.Row>
       <Grid.Column width ={10}>
       <h2>Powered by Openlaw</h2>
+      <Form>
+
       {Object.keys(this.state.executionResult).length && (
         <OpenLawForm
           apiClient={apiClient}
@@ -189,9 +193,12 @@ Eventually this function will no longer be needed. */
           parameters={this.state.parameters}
           onChangeFunction={this.update}
           openLaw={Openlaw}
+          //renderSections = 'Donor'
+          unsectionedTitle="Ethereum Address Yes/No"
           variables={this.state.variables}
         /> 
     )}
+      </Form>
       <Button
       onClick={this.sendDraft}
       >Send Draft

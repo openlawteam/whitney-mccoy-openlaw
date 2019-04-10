@@ -5,7 +5,7 @@ class TransferDonorPage extends Component {
 	render() {
 		return(
 		<Container>
-			<h2>Transfer Donor Page</h2>
+			<h2>Transfer your Token Id to new Donor</h2>
 			<TransferTokenForm/>
 			<Divider/>
 

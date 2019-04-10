@@ -59,6 +59,7 @@ allowTokenSpender = async (event) => {
 render() {
   return(
  <Segment color = 'yellow'>
+ <h2>Authorize Spender Ethereum Address</h2>
   <Form onSubmit = {this.allowTokenSpender}>
     <Form.Field>
       <label>Token Id</label>
