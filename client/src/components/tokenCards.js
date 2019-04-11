@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import McCoyContract from "../contracts/McCoyContract.json";
 import getWeb3 from "../utils/getWeb3";
-import { Card, Table, Container } from 'semantic-ui-react'
+import { Card, Table, Container, Button } from 'semantic-ui-react'
 
 class TokenCards extends Component {
   state = {
@@ -17,9 +17,10 @@ class TokenCards extends Component {
 componentDidMount = async () => {
   await this.getTotalSupply();
   this.updateCards();
+
 }
 
-updateCards = async()=>{
+updateCards = async(event)=>{
   console.log('updating cards..');
   try{
       //connect to web3 and contract instance 
@@ -41,118 +42,57 @@ updateCards = async()=>{
       //get total supply of all tokenIDs that exist 
       let tokenSupply =  this.state.allTokens;
       //array to used to collect tokenId, owner address, and metadata
-      const myTokenList = [];
-
-          // FELIPE SOLUTION
-          // let ownerAddress = await functionToGetOwner();
-          // let propertyN = await functionToGetPropertyN();
-          // myTokenList.push({
-          // key: i,
-          // tokenId: result.tokenId,
-          // tokenMetadata: result.tokenMetadata,
-          // owner: ownerAddress,
-          // propertyN: propertyN
-          // });
-      
+       const myTokenList = [];
+   
       for(i=0; i < tokenSupply; i++) {
-
-        instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
-          const tokenId = result.toString(10);
-          myTokenList.push(tokenId);
+        //get the tokenId from the index #
+        let tokenId = await instance.methods.tokenByIndex(i).call({from: accounts[0]}, (error, result) =>{
+         // const tokenId = result.toString(10);
+         //console.log(error, result.toString(10));
+          return result.toString(10);
         }); //tokenByIndex call
 
-        //?? PROBLEM - can't use await to resolve promises ??
-        // let tokenId = this.getTokenByIndex(i);
-        // let ownerAddress =  this.getOwnerAddress(i);
-        // let tokenMetaData = this.getTokenMetaData(i);
-
-        // let tokenId =  await this.getTokenByIndex(i);
-        // console.log("trying...",tokenId);
-        // let ownerAddress = await this.getOwnerAddress(i);
-        // let tokenMetaData =  await this.getTokenMetaData(i);
-
-        // //pust results to array myTokenList
-        // myTokenList.push({
-        //   key:i,
-        //   tokenId: tokenId,
-        //   tokenMetadata: tokenMetaData,
-        //   ownerAddress: ownerAddress
-        // });
-
+        //use the tokenId to get its owner's Eth address
+        let ownerAddress = await instance.methods.ownerOf(tokenId).call({from:accounts[0]}, (error, result) =>{
+          //console.log(error, "eth.."+ result);
+          return result.toString();
+        })
+         //use the tokenId to get its Metadata
+       let tokenMetadata = await instance.methods.tokenURI(tokenId).call({from:accounts[0]}, (error, result) =>{
+          //console.log(error, "")
+          return result;
+        })
+       //push values into myTokenList array
+        myTokenList.push({
+          key:i,
+          tokenid: tokenId.toString(10),
+          tokenuri: tokenMetadata,
+          owneraddress: ownerAddress
+        });
       }//for loop
-        
-      console.log('the array index to tokenId..', myTokenList);            
+        //this.setState({myTokenList});
+      console.log('the array index to tokenId..', myTokenList);
+     //map array to an element
+      const listItems = myTokenList.map((tokens)=>
+        <Card key={tokens.key} raised = {true}>
+          <Card.Content textAlign = 'left'>
+          <Card.Header>Token ID: {tokens.tokenid}</Card.Header>
+            <Card.Description><strong>Meta:</strong> {tokens.tokenuri}</Card.Description>
+            <Card.Description ><strong>Owner:</strong>
+            {tokens.owneraddress}</Card.Description>
+            <Button basic color='purple'> <a href = {'https://rinkeby.etherscan.io/token/0x504dba74322ced2a1f32f460fa92882b746064e5?a='+ tokens.tokenid} 
+              target="_blank"
+          >Tx History</a></Button>
+          </Card.Content>
+        </Card>  
+      )
+      this.setState({listItems});
+       
   } //try
   catch(error){
     console.log('error updating cards', error)
   }
 }//updateCards
-
-/*Functions to use inside updateCards and loop over to push to myTokenList*/
-getOwnerAddress = async(Qoo)=>{
-  try{
-        const web3 = await getWeb3();
-        const accounts = await web3.eth.getAccounts();
-       // console.log('update cards from ..',accounts[0]);
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = McCoyContract.networks[networkId];
-
-        const instance = new web3.eth.Contract(
-          McCoyContract.abi,
-          deployedNetwork && deployedNetwork.address,
-        );
-      instance.methods.ownerOf(Qoo).call({from: accounts[0]}, (error, result) =>{
-          console.log(error,"owner.." + result);
-          const ownerAddress = result;
-          return ownerAddress;
-        });
-
-  } catch(error){console.log('get owner address error', error)}
-}//getOwnerAddress
-
-getTokenByIndex = async(Qoo)=>{
-    try{
-        const web3 = await getWeb3();
-        const accounts = await web3.eth.getAccounts();
-        //console.log('update cards from ..',accounts[0]);
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = McCoyContract.networks[networkId];
-
-        const instance = new web3.eth.Contract(
-          McCoyContract.abi,
-          deployedNetwork && deployedNetwork.address,
-        );
-      await instance.methods.tokenByIndex(Qoo).call({from: accounts[0]}, (error, result) =>{
-          console.log(error,"index.." + result);
-          const tokenId = result.toString(10);
-          return tokenId;
-     
-        });
-
-  } catch(error){console.log('token index error..', error)}
-
-}//getTokenByIndes
-
-getTokenMetaData = async(Qoo)=>{
-  try{
-        const web3 = await getWeb3();
-        const accounts = await web3.eth.getAccounts();
-        //console.log('update cards from ..',accounts[0]);
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = McCoyContract.networks[networkId];
-
-        const instance = new web3.eth.Contract(
-          McCoyContract.abi,
-          deployedNetwork && deployedNetwork.address,
-        );
-      instance.methods.tokenURI(Qoo).call({from: accounts[0]}, (error, result) =>{
-          console.log(error,"meta.." + result);
-          const tokenMetaData = result;
-          return tokenMetaData;
-        });
-
-  } catch(error){console.log('get token metadata error', error)}
-}//getOwnerAddress
 
 getTotalSupply= async(event)=>{
   try{
@@ -182,19 +122,9 @@ getTotalSupply= async(event)=>{
   render() {
     return(
   <Container>
-  <h3> token list </h3>
-   <Card.Group itemsPerRow={3}>
-    <Card>
-      <Card.Content>
-        <Card.Header>Token Id 1</Card.Header>
-        <Card.Meta>meta data of token</Card.Meta>
-         <Card.Description>0xad9b86640008f02d9f2f3f0702133cea4eecb18c</Card.Description>
-        <Card.Meta>Current Donor</Card.Meta>
-      </Card.Content>
-    </Card>
+  <h3> Token List </h3>
 
-  </Card.Group>
-  
+  <Card.Group itemsPerRow={2}>{this.state.listItems}</Card.Group>
   </Container>
 
 )
