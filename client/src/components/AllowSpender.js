@@ -19,7 +19,7 @@ class AllowSpender extends Component {
 
 allowTokenSpender = async (event) => {
     console.log('allow token spender..');
-     const accounts = this.state.accounts;
+    const accounts = this.state.accounts;
     const instance = this.state.instance;
     this.setState({loading: true, errorMessage:'', successMessage:''});
     event.preventDefault();
@@ -46,36 +46,44 @@ allowTokenSpender = async (event) => {
           console.log(error, transactionHash);
           
         });
-
+         this.setState({successMessage: 'Spender is authorized'});
     }//try
     catch(error) {
+      console.log('spender error', error)
       this.setState({errorMessage: error.message});
 
     }
-
-    console.log("spender approved");
+    this.setState({loading:false});
 };// allowTokenSpender 
 
 render() {
   return(
  <Segment color = 'yellow'>
-  <Form onSubmit = {this.allowTokenSpender}>
+ <h2>Authorize Spender Ethereum Address</h2>
+  <Form onSubmit = {this.allowTokenSpender}
+  success={!!this.state.successMessage}
+  error = {!!this.state.errorMessage} >
+  <Message error header = 'Spender has not been authorized' content = {this.state.errorMessage}/>
+  <Message success header = 'Spender Authorized' content={this.state.successMessage} />
+    
     <Form.Field>
       <label>Token Id</label>
-      <input placeholder='Ethereum Address'
+      <input placeholder='Token ID'
         value = {this.state.tokenId}
         onChange = {event => this.setState({tokenId: event.target.value})}
-       />
+       required/>
     </Form.Field>
     <Form.Field>
       <label>Ethereum Address of Spender</label>
-      <input placeholder='Token Number' 
+      <input placeholder='Ethereum Address of Spender' 
         value = {this.state.spenderEthereumAddress}
           onChange = {event => this.setState({spenderEthereumAddress: event.target.value})}
-      />
+      required />
     </Form.Field>
 
-    <Button type='submit'>Allow Spender</Button>
+    <Button 
+    loading = {this.state.loading}
+    type='submit'>Allow Spender</Button>
   </Form>
   </Segment>
 

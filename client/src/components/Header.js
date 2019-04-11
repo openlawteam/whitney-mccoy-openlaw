@@ -69,15 +69,17 @@ class Header extends Component{
   render() {
     return (
           <Grid  columns={2} divided >
+
            <Grid.Row>
             <Grid.Column width={10}>
                 <ImageMcCoy/>
             </Grid.Column>
-          <Grid.Column width={6}>
-            <p> Contract Address {this.state.contractAddress}</p>
-            <p> Token Name {this.state.tokenName} </p>
-            <p> Token symbol {this.state.tokenSymbol}</p>
-            <p> Total Supply Tokens {this.state.allTokens}</p>
+          <Grid.Column width={6} textAlign = 'left'>
+            <h2 className = "info-field">Public Private Key by the McCoys</h2>
+            <h4 className = "info-field"> Contract Address: {this.state.contractAddress}</h4>
+            <h4 className = "info-field"> Token Name: {this.state.tokenName} </h4>
+            <h4 className = "info-field"> Token symbol: {this.state.tokenSymbol}</h4>
+            <h4 className = "info-field"> Total Supply: Tokens {this.state.allTokens}</h4>
           </Grid.Column>
           </Grid.Row>
         </Grid>

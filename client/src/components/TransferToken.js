@@ -19,6 +19,7 @@ class TransferTokenForm extends Component {
 
    transferToken = async(event)=>{
     console.log("transferToken...");
+    this.setState({loading: true, errorMessage:'', successMessage:''});
     event.preventDefault();
       try{
         const web3 = await getWeb3();
@@ -38,38 +39,49 @@ class TransferTokenForm extends Component {
           console.log(error, transactionHash);
           
         });
-
-      } catch(error) {
-        console.log("errors..",error);
+        this.setState({successMessage: 'token transfered'});
       }
+      catch(error) {
+        console.log("errors..",error);
+        this.setState({errorMessage:error.message});
+      }
+      this.setState({loading:false});
    }
 
    render() {
     return(
         <Segment color = 'orange'>
-          <Form onSubmit = {this.transferToken}>
+        <h2>Transfer Token </h2>
+          <Form onSubmit = {this.transferToken}
+              success={!!this.state.successMessage}
+            error = {!!this.state.errorMessage}
+          >
+          <Message error header = 'Token Transfer failed' content = {this.state.errorMessage}/>
+  <Message success header = 'Token Transfered' content={this.state.successMessage} />
             <Form.Field>
               <label>My Ethereum Address</label>
               <input placeholder='Current Ethereum Address' 
                 value = {this.state.currentEthereumAddress}
                 onChange = {event => this.setState({currentEthereumAddress: event.target.value})}
-              />
+                required />
             </Form.Field>
             <Form.Field>
               <label>New Donor Ethereum Address</label>
               <input placeholder='New Donor Ethereum Address' 
                 value = {this.state.newEthereumAddress}
                 onChange = {event => this.setState({newEthereumAddress: event.target.value})}
-              />
+              required />
             </Form.Field>
             <Form.Field>
             <label>Token Id Number</label>
               <input placeholder = 'Token Id #'
               value = {this.state.tokenId}
               onChange = {event => this.setState({tokenId: event.target.value})}  
-              />
+              required/>
             </Form.Field>
-            <Button type='submit'>Transfer Token</Button>
+            <Button 
+            loading = {this.state.loading}
+            type='submit'>Transfer Token</Button>
           </Form>
         </Segment>
       )

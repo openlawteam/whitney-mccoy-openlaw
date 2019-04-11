@@ -54,7 +54,7 @@ class MintToken extends Component {
           {from: accounts[0]}, (error, txHash) =>{
               console.log(error, txHash);
           });
-           this.setState({successMessage: 'ART NFT Created!'});
+           this.setState({successMessage: 'ART Token Created!'});
     } //try
     catch(error) {
       this.setState({errorMessage:error.message});
@@ -67,6 +67,7 @@ class MintToken extends Component {
 
     return (
       <Segment color = 'teal'>
+      <h2>Mint New Token</h2>
       <Form onSubmit = {this.mintToken}
             success={!!this.state.successMessage}
             error={!!this.state.errorMessage}>
@@ -77,7 +78,7 @@ class MintToken extends Component {
           <input placeholder='some string' 
             value = {this.state.metaData}
             onChange = {event => this.setState({metaData: event.target.value})}
-          />
+            required />
         </Form.Field>
         
         <Form.Field>
@@ -85,7 +86,7 @@ class MintToken extends Component {
           <input placeholder='Token Number'
           value = {this.state.tokenId}
           onChange = {event => this.setState({tokenId: event.target.value})}
-          />
+          required />
         </Form.Field>
 
         <Button 
