@@ -75,11 +75,11 @@ class Header extends Component{
                 <ImageMcCoy/>
             </Grid.Column>
           <Grid.Column width={6} textAlign = 'left'>
-            <h2>Public Private Key by the McCoys</h2>
-            <h4> Contract Address: {this.state.contractAddress}</h4>
-            <h4> Token Name: {this.state.tokenName} </h4>
-            <h4> Token symbol: {this.state.tokenSymbol}</h4>
-            <h4> Total Supply: Tokens {this.state.allTokens}</h4>
+            <h2 className = "info-field">Public Private Key by the McCoys</h2>
+            <h4 className = "info-field"> Contract Address: {this.state.contractAddress}</h4>
+            <h4 className = "info-field"> Token Name: {this.state.tokenName} </h4>
+            <h4 className = "info-field"> Token symbol: {this.state.tokenSymbol}</h4>
+            <h4 className = "info-field"> Total Supply: Tokens {this.state.allTokens}</h4>
           </Grid.Column>
           </Grid.Row>
         </Grid>

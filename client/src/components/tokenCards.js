@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import McCoyContract from "../contracts/McCoyContract.json";
 import getWeb3 from "../utils/getWeb3";
-import { Card, Table, Container } from 'semantic-ui-react'
+import { Card, Table, Container, Button } from 'semantic-ui-react'
 
 class TokenCards extends Component {
   state = {
@@ -74,15 +74,15 @@ updateCards = async(event)=>{
       console.log('the array index to tokenId..', myTokenList);
      //map array to an element
       const listItems = myTokenList.map((tokens)=>
-        <Card key={tokens.key} raised = 'true'>
+        <Card key={tokens.key} raised = {true}>
           <Card.Content textAlign = 'left'>
-          <a href = {'https://rinkeby.etherscan.io/token/0x504dba74322ced2a1f32f460fa92882b746064e5?a='+ tokens.tokenid} 
-              target="_blank"
-          >Tx History</a>
-            <Card.Header>Token ID: {tokens.tokenid}</Card.Header>
-            <Card.Meta>Meta: {tokens.tokenuri}</Card.Meta>
+          <Card.Header>Token ID: {tokens.tokenid}</Card.Header>
+            <Card.Description><strong>Meta:</strong> {tokens.tokenuri}</Card.Description>
             <Card.Description ><strong>Owner:</strong>
             {tokens.owneraddress}</Card.Description>
+            <Button basic color='purple'> <a href = {'https://rinkeby.etherscan.io/token/0x504dba74322ced2a1f32f460fa92882b746064e5?a='+ tokens.tokenid} 
+              target="_blank"
+          >Tx History</a></Button>
           </Card.Content>
         </Card>  
       )

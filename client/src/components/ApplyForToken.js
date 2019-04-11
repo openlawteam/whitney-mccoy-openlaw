@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Grid, Form, Button, Message, Modal, Icon }from 'semantic-ui-react';
+import { Container, Grid, Form, Button, Message, Modal }from 'semantic-ui-react';
 import { APIClient, Openlaw } from 'openlaw';
 import OpenLawForm from 'openlaw-elements';
 import 'openlaw-elements/dist/openlaw-elements.min.css';
