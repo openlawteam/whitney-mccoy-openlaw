@@ -78,7 +78,7 @@ class MintToken extends Component {
           <input placeholder='some string' 
             value = {this.state.metaData}
             onChange = {event => this.setState({metaData: event.target.value})}
-          />
+            required />
         </Form.Field>
         
         <Form.Field>
@@ -86,7 +86,7 @@ class MintToken extends Component {
           <input placeholder='Token Number'
           value = {this.state.tokenId}
           onChange = {event => this.setState({tokenId: event.target.value})}
-          />
+          required />
         </Form.Field>
 
         <Button 

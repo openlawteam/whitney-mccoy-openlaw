@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Grid, Form, Button, Message }from 'semantic-ui-react';
+import { Container, Grid, Form, Button, Message, Modal, Icon }from 'semantic-ui-react';
 import { APIClient, Openlaw } from 'openlaw';
 import OpenLawForm from 'openlaw-elements';
 import 'openlaw-elements/dist/openlaw-elements.min.css';
@@ -182,9 +182,9 @@ Eventually this function will no longer be needed. */
     <Container>
     <Grid>
     <Grid.Row>
-      <Grid.Column width ={10}>
+      <Grid.Column width ={16}>
       <h2>Powered by Openlaw</h2>
-      <Form>
+      <Form width = {10}>
 
       {Object.keys(this.state.executionResult).length && (
         <OpenLawForm
@@ -197,22 +197,16 @@ Eventually this function will no longer be needed. */
           unsectionedTitle="Ethereum Address Yes/No"
           variables={this.state.variables}
         /> 
-    )}
+      )}
       </Form>
-      <Button
-      onClick={this.sendDraft}
-      >Send Draft
-      </Button>
-      </Grid.Column>
-      <Grid.Column width ={6}>
-
-      <h2>Preview</h2>
-      <div dangerouslySetInnerHTML={{__html: this.state.previewHtml}} />
-    <Button
-      onClick={this.renderPreview}
-    >Click to Preview</Button>
-
-      </Grid.Column>
+        <Button
+          onClick={this.sendDraft}
+          >Send Draft
+          </Button> 
+        <Modal trigger={<Button onClick={this.renderPreview}>Show Preview</Button>} closeIcon>
+        <Modal.Content> <div dangerouslySetInnerHTML={{__html: this.state.previewHtml}}/>  </Modal.Content>
+        </Modal>
+    </Grid.Column>
       </Grid.Row>
       </Grid>
     </Container>

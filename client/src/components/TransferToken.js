@@ -63,21 +63,21 @@ class TransferTokenForm extends Component {
               <input placeholder='Current Ethereum Address' 
                 value = {this.state.currentEthereumAddress}
                 onChange = {event => this.setState({currentEthereumAddress: event.target.value})}
-              />
+                required />
             </Form.Field>
             <Form.Field>
               <label>New Donor Ethereum Address</label>
               <input placeholder='New Donor Ethereum Address' 
                 value = {this.state.newEthereumAddress}
                 onChange = {event => this.setState({newEthereumAddress: event.target.value})}
-              />
+              required />
             </Form.Field>
             <Form.Field>
             <label>Token Id Number</label>
               <input placeholder = 'Token Id #'
               value = {this.state.tokenId}
               onChange = {event => this.setState({tokenId: event.target.value})}  
-              />
+              required/>
             </Form.Field>
             <Button 
             loading = {this.state.loading}

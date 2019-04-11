@@ -71,14 +71,14 @@ render() {
       <input placeholder='Token ID'
         value = {this.state.tokenId}
         onChange = {event => this.setState({tokenId: event.target.value})}
-       />
+       required/>
     </Form.Field>
     <Form.Field>
       <label>Ethereum Address of Spender</label>
       <input placeholder='Ethereum Address of Spender' 
         value = {this.state.spenderEthereumAddress}
           onChange = {event => this.setState({spenderEthereumAddress: event.target.value})}
-      />
+      required />
     </Form.Field>
 
     <Button 
