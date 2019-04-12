@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
   background-color: aliceblue;
@@ -10,6 +11,13 @@
 .info-field{
   color: purple;
 }
+
+.ui.menu{
+  background-color: lavender;
+/*  font-weight: bold;
+  color: purple;*/
+}
+
 
 .App-header {
   background-color: #282c34;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import McCoyContract from "../contracts/McCoyContract.json";
 import getWeb3 from "../utils/getWeb3";
-import { Card, Table, Container, Button } from 'semantic-ui-react'
+import { Card, Container, Button } from 'semantic-ui-react'
 
 class TokenCards extends Component {
   state = {
@@ -82,6 +82,7 @@ updateCards = async(event)=>{
             {tokens.owneraddress}</Card.Description>
             <Button basic color='purple'> <a href = {'https://rinkeby.etherscan.io/token/0x504dba74322ced2a1f32f460fa92882b746064e5?a='+ tokens.tokenid} 
               target="_blank"
+              rel="noopener noreferrer"
           >Tx History</a></Button>
           </Card.Content>
         </Card>  

@@ -12,6 +12,7 @@ export default class MenuBar extends Component {
 
     return (
       <Menu>
+
         <Menu.Item
           name='landingPage'
           active={activeItem === 'landingPage'}
@@ -28,7 +29,7 @@ export default class MenuBar extends Component {
         as = {NavLink}
         to = '/New-Donor'
         >
-          Sign up to be Donor
+          Sign up to be Donor of Record
         </Menu.Item>
 
         <Menu.Item
@@ -38,7 +39,7 @@ export default class MenuBar extends Component {
           as = {NavLink}
           to = '/Transfer-Donor' 
         >
-        Transfer Donor Token
+        Transfer Donor of Record Token
         </Menu.Item>
 
         <Menu.Item
