@@ -80,6 +80,7 @@ class Header extends Component{
             <h4 className = "info-field"> Token Name: {this.state.tokenName} </h4>
             <h4 className = "info-field"> Token symbol: {this.state.tokenSymbol}</h4>
             <h4 className = "info-field"> Total Supply: Tokens {this.state.allTokens}</h4>
+            <h5 > * Smart Contracts by Openlaw.io *</h5>
           </Grid.Column>
           </Grid.Row>
         </Grid>

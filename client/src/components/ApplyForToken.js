@@ -184,8 +184,8 @@ Eventually this function will no longer be needed. */
     <Grid.Row>
       <Grid.Column width ={16}>
       <h2>Powered by Openlaw</h2>
-      <Form width = {10}>
-
+      <p>something something short about openlaw</p>
+      <Form >
       {Object.keys(this.state.executionResult).length && (
         <OpenLawForm
           apiClient={apiClient}
@@ -201,7 +201,7 @@ Eventually this function will no longer be needed. */
       </Form>
         <Button
           onClick={this.sendDraft}
-          >Send Draft
+          >Send to Openlaw
           </Button> 
         <Modal trigger={<Button onClick={this.renderPreview}>Show Preview</Button>} closeIcon>
         <Modal.Content> <div dangerouslySetInnerHTML={{__html: this.state.previewHtml}}/>  </Modal.Content>
