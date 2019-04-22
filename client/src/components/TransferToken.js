@@ -58,6 +58,7 @@ class TransferTokenForm extends Component {
           >
           <Message error header = 'Token Transfer failed' content = {this.state.errorMessage}/>
           <Message success header = 'Token Transfered' content={this.state.successMessage} />
+           
             <Form.Field>
               <label>My Ethereum Address</label>
               <Input placeholder='Current Ethereum Address' 
@@ -80,7 +81,7 @@ class TransferTokenForm extends Component {
               required/>
             </Form.Field>
             
-            <Button type='submit'>Transfer Token </Button>
+            <Button type='submit' primary>Transfer Token </Button>
           </Form>
         </Segment>
       )
