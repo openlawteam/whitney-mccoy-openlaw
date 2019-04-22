@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Segment, Message } from 'semantic-ui-react'
+import { Button, Form, Segment, Message,Input } from 'semantic-ui-react'
 import McCoyContract from "../contracts/McCoyContract.json";
 import getWeb3 from "../utils/getWeb3";
 
@@ -18,7 +18,7 @@ class TransferTokenForm extends Component {
    };
 
    transferToken = async(event)=>{
-    console.log("transferToken...");
+ 
     this.setState({loading: true, errorMessage:'', successMessage:''});
     event.preventDefault();
       try{
@@ -34,18 +34,17 @@ class TransferTokenForm extends Component {
         );
 
         this.setState({accounts, web3,instance})
-        instance.methods.safeTransferFrom(this.state.currentEthereumAddress, this.state.newEthereumAddress, this.state.tokenId).send({from: accounts[0]}, (error, transactionHash) => 
-        {
-          console.log(error, transactionHash);
-          
+       await instance.methods.safeTransferFrom(this.state.currentEthereumAddress, this.state.newEthereumAddress, this.state.tokenId)
+        .send({
+          from: accounts[0]
         });
         this.setState({successMessage: 'token transfered'});
       }
       catch(error) {
-        console.log("errors..",error);
         this.setState({errorMessage:error.message});
       }
-      this.setState({loading:false});
+      
+        this.setState({loading:false});
    }
 
    render() {
@@ -53,35 +52,35 @@ class TransferTokenForm extends Component {
         <Segment color = 'orange'>
         <h2>Transfer Token </h2>
           <Form onSubmit = {this.transferToken}
+              error = {!!this.state.errorMessage}
               success={!!this.state.successMessage}
-            error = {!!this.state.errorMessage}
+              loading = {this.state.loading}
           >
           <Message error header = 'Token Transfer failed' content = {this.state.errorMessage}/>
-  <Message success header = 'Token Transfered' content={this.state.successMessage} />
+          <Message success header = 'Token Transfered' content={this.state.successMessage} />
             <Form.Field>
               <label>My Ethereum Address</label>
-              <input placeholder='Current Ethereum Address' 
+              <Input placeholder='Current Ethereum Address' 
                 value = {this.state.currentEthereumAddress}
                 onChange = {event => this.setState({currentEthereumAddress: event.target.value})}
                 required />
             </Form.Field>
             <Form.Field>
               <label>New Donor Ethereum Address</label>
-              <input placeholder='New Donor Ethereum Address' 
+              <Input placeholder='New Donor Ethereum Address' 
                 value = {this.state.newEthereumAddress}
                 onChange = {event => this.setState({newEthereumAddress: event.target.value})}
               required />
             </Form.Field>
             <Form.Field>
             <label>Token Id Number</label>
-              <input placeholder = 'Token Id #'
+              <Input placeholder = 'Token Id #'
               value = {this.state.tokenId}
               onChange = {event => this.setState({tokenId: event.target.value})}  
               required/>
             </Form.Field>
-            <Button 
-            loading = {this.state.loading}
-            type='submit'>Transfer Token</Button>
+            
+            <Button type='submit'>Transfer Token </Button>
           </Form>
         </Segment>
       )
