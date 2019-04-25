@@ -77,13 +77,13 @@ updateCards = async(event)=>{
         <Card key={tokens.key} raised = {true}>
           <Card.Content textAlign = 'left'>
           <Card.Header>Token ID: {tokens.tokenid}</Card.Header>
-            <Card.Description><strong>Meta:</strong> {tokens.tokenuri}</Card.Description>
+            <Card.Description><strong>Message:</strong> {tokens.tokenuri}</Card.Description>
             <Card.Description ><strong>Owner:</strong>
             {tokens.owneraddress}</Card.Description>
             <Button basic color='purple'> <a href = {'https://rinkeby.etherscan.io/token/0x504dba74322ced2a1f32f460fa92882b746064e5?a='+ tokens.tokenid} 
               target="_blank"
               rel="noopener noreferrer"
-          >Tx History</a></Button>
+          >Token History</a></Button>
           </Card.Content>
         </Card>  
       )

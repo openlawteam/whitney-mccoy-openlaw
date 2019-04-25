@@ -58,7 +58,7 @@ class MintToken extends Component {
             error={!!this.state.errorMessage}
             loading = {this.state.loading}
             >
-        <Message error header='Error try refreshing page' content={this.state.errorMessage} />
+        <Message error header='Error:Address not authorized to mint' content={this.state.errorMessage} />
         <Message success header='Complete' content={this.state.successMessage} />
        
         <Form.Field>

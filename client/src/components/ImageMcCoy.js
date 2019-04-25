@@ -3,7 +3,7 @@ import { Image } from 'semantic-ui-react'
 
 const ImageMcCoy = () => (
         <Image 
-        src={require('./mccoy-film.jpg')}
+        src={require('./mccoy-film-crop.png')}
         href='https://whitney.org/exhibitions/public-key-private-key'
         target = '_blank'
         />

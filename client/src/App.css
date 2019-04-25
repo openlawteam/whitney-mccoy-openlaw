@@ -1,7 +1,8 @@
 
 .App {
   text-align: center;
-  background-color: aliceblue;
+  background-color: #C0BCD7;
+  /*background-image: url("components/mccoy-film.jpg");*/
 }
 
 .App-logo {
@@ -9,7 +10,7 @@
   height: 40vmin;
 }
 .info-field{
-  color: purple;
+  /*color: #4A3D34;*/
 }
 
 .ui.menu{

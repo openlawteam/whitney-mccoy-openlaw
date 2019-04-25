@@ -70,10 +70,10 @@ class Header extends Component{
     return (
           <Grid  columns={2} divided >
 
-           <Grid.Row>
+           <Grid.Row> 
             <Grid.Column width={10}>
                 <ImageMcCoy/>
-            </Grid.Column>
+            </Grid.Column> 
           <Grid.Column width={6} textAlign = 'left'>
             <h2 className = "info-field">Public Private Key by the McCoys</h2>
             <h4 className = "info-field"> Contract Address: {this.state.contractAddress}</h4>

@@ -22,7 +22,7 @@ export default class MenuBar extends Component {
         >
         Token Tracker
         </Menu.Item>
-
+{/* JSX Comment 
         <Menu.Item name='newDonor' 
         active={activeItem === 'newDonor'}
         onClick={this.handleItemClick}
@@ -31,7 +31,7 @@ export default class MenuBar extends Component {
         >
           Sign up to be Donor of Record
         </Menu.Item>
-
+*/}
         <Menu.Item
           name='transferDonor'
           active={activeItem === 'transferDonor'}
@@ -42,7 +42,8 @@ export default class MenuBar extends Component {
         Transfer Donor of Record Token
         </Menu.Item>
 
-        <Menu.Item
+      {/* JSX Comment  
+       <Menu.Item
           name='artistDashboard'
           active={activeItem === 'artistDashboard'}
           onClick={this.handleItemClick}
@@ -50,7 +51,7 @@ export default class MenuBar extends Component {
           to = '/Artist-Dashboard' 
         >
           Artist Dashboard
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     )
   }
