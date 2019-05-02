@@ -1,8 +1,8 @@
 # whitney-mccoy-openlaw
 
 To start from the terminal and run on http://localhost:3000:
-1.  make sure you are in the "mccoy-revisions" branch to make changes. 
-2. "cd client" 
+1.  start from the root directoy 'whitney-mccoy-openlaw' 
+2. "cd client" (client folder in the root directory). 
 3. "npm run start" 
 
 
