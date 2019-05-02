@@ -1,10 +1,13 @@
 # whitney-mccoy-openlaw
 
-To start from the terminal and run on http://localhost:3000:  
-1. "cd client" 
-2. "npm run start" 
+To start from the terminal and run on http://localhost:3000:
+1.  make sure you are in the "mccoy-revisions" branch to make changes. 
+2. "cd client" 
+3. "npm run start" 
 
-Todo: 
+
+# Todo: 
+
 - on LandingPage - paginate so 50 tokens can be viewed easily. 
 
 - Header on LandingPage can be occasionally be slow to load.
@@ -13,7 +16,7 @@ Todo:
 
 - on "Artist-Dashboard" page - currently, I do not show display a link to the that page in the Menu, because only the Artist needs access. Is there is a better way to handle?  It is secure on the backend in Solidity. 
 
-- deploy a fresh smart contract with McCoy Ethereum address as owner 
+- Currently, Michael Chan's Metamask account is associated as the current owner of the smart contract. A fresh smart contract will need to be deployed with the McCoy Ethereum address as owner. 
 
 - when finished deploy as static site on github pages with mccoyspace.com/some-subdomain-name
 
