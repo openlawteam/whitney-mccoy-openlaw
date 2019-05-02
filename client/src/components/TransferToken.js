@@ -49,8 +49,9 @@ class TransferTokenForm extends Component {
 
    render() {
     return(
-        <Segment color = 'orange'>
-        <h2>Transfer Token </h2>
+        <Segment color='orange'>
+          <h2 className="content-heading">Transfer Donor Token</h2>
+          <p className="additional-text">Transfer your Token to a new "Donor of Record"</p>
           <Form onSubmit = {this.transferToken}
               error = {!!this.state.errorMessage}
               success={!!this.state.successMessage}
