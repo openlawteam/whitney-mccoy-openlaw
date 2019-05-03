@@ -1,16 +1,11 @@
 # whitney-mccoy-openlaw
 
 To start from the terminal and run on http://localhost:3000:
-1.  start from the root directoy 'whitney-mccoy-openlaw' 
+1.  start from the root directoy 'whitney-mccoy-openlaw' in the 'master' branch
 2. "cd client" (client folder in the root directory). 
 3. "npm run start" 
 
-
 # Todo: 
-
-- on LandingPage - paginate so 50 tokens can be viewed easily. 
-
-- Header on LandingPage can be occasionally be slow to load.
 
 - on TransferToken component - 'success message' takes too long to load ( > 2min after the transaction has cleared on MetaMask). Same issue for "MintToken" and "AllowSpender" components on the Artist-Dashboard.
 
