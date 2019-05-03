@@ -31,7 +31,8 @@
   font-size: 1.15rem;
 }
 .whitney .by-mccoys,
-.whitney .additional-text {
+.whitney .additional-text,
+.whitney .section-heading {
   color: #949494;
 }
 .whitney .whitney-text {
@@ -176,10 +177,14 @@
 .whitney .ui.message {
   border-radius: 0;
 }
-.whitney .content-heading {
+.whitney .content-heading,
+.whitney .section-heading {
   margin-top: 1rem;
   text-transform: uppercase;
   font-size: 1.55rem;
+}
+.whitney .section-heading {
+  font-size: 2rem;
 }
 .whitney .token-tracker-list {
   /* max-height: 360px; */

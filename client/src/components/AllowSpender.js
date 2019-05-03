@@ -53,7 +53,7 @@ allowTokenSpender = async (event) => {
 render() {
   return(
  <Segment color = 'yellow'>
- <h2>Authorize Spender Ethereum Address</h2>
+ <h2 className="content-heading">Authorize Spender Ethereum Address</h2>
   <Form onSubmit = {this.allowTokenSpender}
       success={!!this.state.successMessage}
       error = {!!this.state.errorMessage}
@@ -77,7 +77,7 @@ render() {
         required />
     </Form.Field>
 
-    <Button type ='submit'>Allow Spender</Button>
+    <Button className="ui button primary" type ='submit'>Allow Spender</Button>
   </Form>
   </Segment>
 

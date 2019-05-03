@@ -52,7 +52,7 @@ class MintToken extends Component {
 
     return (
       <Segment color = 'teal'>
-      <h2>Mint New Token</h2>
+      <h2 className="content-heading">Mint New Token</h2>
       <Form onSubmit = {this.mintToken}
             success={!!this.state.successMessage}
             error={!!this.state.errorMessage}
@@ -77,7 +77,7 @@ class MintToken extends Component {
           required />
         </Form.Field>
 
-        <Button type ='submit'>Mint Token</Button>
+        <Button className="ui button primary" type='submit'>Mint Token</Button>
       </Form>
       </Segment>
 
