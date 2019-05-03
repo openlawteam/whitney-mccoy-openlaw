@@ -8,7 +8,7 @@ class ArtistDashboardPage extends Component {
 	render() {
 		return(
 		<Container>
-			<h2>Artist Dashboard</h2>
+			<h2 className="section-heading">Artist Dashboard</h2>
 			
 			<MintToken/>
 			
