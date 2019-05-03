@@ -6,7 +6,9 @@ To start from the terminal and run on http://localhost:3000:
 3. "npm run start" 
 
 # Todo for Jennifer & Kevin
-In the 'fresh-token-contract' branch. This is a fresh solidity contract with no tokens minted.  Ownership is with your Eth address: 0xA57fB5A5aD51beb3854D801ea3Ad6AC2845CD082.  So, you should be the only Minter.  
+In the 'fresh-token-contract' branch. This is a fresh solidity contract with no tokens minted.  Ownership is with your Eth address: 0xA57fB5A5aD51beb3854D801ea3Ad6AC2845CD082.  So, you should be the only Minter. 
+ 
+ It may hang on a loading state when you mint (also 'allow spender' and 'transfer token'), but you should see the transaction confirmed within Metamask. After you see the confirmation in Metamask, you may have to reload the page.  This seems to be an issue I've been having with Metamask on other applications as well -- outside of this application.   
 
 # Todo: 
 
