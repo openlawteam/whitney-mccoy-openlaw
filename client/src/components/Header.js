@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Grid }from 'semantic-ui-react';
-import ImageMcCoy from './ImageMcCoy';
+// import { Grid } from 'semantic-ui-react';
+// import ImageMcCoy from './ImageMcCoy';
 import McCoyContract from "../contracts/McCoyContract.json";
 import getWeb3 from "../utils/getWeb3";
 class Header extends Component{
@@ -68,24 +68,14 @@ class Header extends Component{
 
   render() {
     return (
-          <Grid  columns={2} divided >
-
-           <Grid.Row> 
-            <Grid.Column width={10}>
-                <ImageMcCoy/>
-            </Grid.Column> 
-          <Grid.Column width={6} textAlign = 'left'>
-            <h2 className = "info-field">Public Private Key by the McCoys</h2>
-            <h4 className = "info-field"> Contract Address: {this.state.contractAddress}</h4>
-            <h4 className = "info-field"> Token Name: {this.state.tokenName} </h4>
-            <h4 className = "info-field"> Token symbol: {this.state.tokenSymbol}</h4>
-            <h4 className = "info-field"> Total Supply: Tokens {this.state.allTokens}</h4>
-            <h5 > * Smart Contracts by Openlaw.io *</h5>
-          </Grid.Column>
-          </Grid.Row>
-        </Grid>
-
-    )
+      <div className="token-info-container">
+        <h2 className="info-field mccoy-text">Public / Private Key <span className="by-mccoys">by the McCoys</span></h2>
+        <h4 className="info-field eth-addr"><span className="info-title">Contract Address:</span> <span>{this.state.contractAddress}</span></h4>
+        <h4 className="info-field"><span className="info-title">Token Name:</span> {this.state.tokenName} </h4>
+        <h4 className="info-field"><span className="info-title">Token Symbol:</span> {this.state.tokenSymbol}</h4>
+        <h4 className="info-field"><span className="info-title">Total Supply:</span> {this.state.allTokens} tokens</h4>
+      </div>
+    );
   }
 }
 

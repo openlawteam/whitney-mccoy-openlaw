@@ -121,14 +121,14 @@ getTotalSupply= async(event)=>{
 }//getOwnerAddress
 
   render() {
-    return(
-  <Container>
-  <h3> Token List </h3>
-
-  <Card.Group itemsPerRow={2}>{this.state.listItems}</Card.Group>
-  </Container>
-
-)
+    return (
+      <Container>
+        <h2 className="content-heading">Token List</h2>
+        <div className="token-tracker-list">
+          <Card.Group itemsPerRow={1}>{this.state.listItems}</Card.Group>
+        </div>
+      </Container>
+    );
   }
 }
 

@@ -1,0 +1,209 @@
+.whitney {
+  background-color: #ffffff;
+  /* font-family: 'Roboto', sans-serif; */
+}
+.whitney header {
+  height: 50px;
+  padding: 0 1rem 0 1rem;
+}
+.whitney h1 {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: .9375rem;
+  line-height: 1.3;
+  padding: 1.15rem;
+}
+.whitney h1 span {
+  display: inline-block;
+}
+.whitney h2.mccoy-text {
+  font-size: 3.25rem;
+  line-height: .92;
+  margin-top: 1rem;
+}
+.whitney .mccoy-text {
+  text-align: left;
+  float: left;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.15rem;
+}
+.whitney .by-mccoys,
+.whitney .additional-text {
+  color: #949494;
+}
+.whitney .whitney-text {
+  text-align: right;
+  text-transform: none;
+  float: right;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 1.15rem;
+}
+.whitney .powered-by {
+  text-transform: none;
+  font-weight: 300;
+  position: absolute;
+  top: -4px;
+  left: 25rem;
+  display: inline-block;
+  width: 20rem;
+  font-size: 1rem;
+}
+.whitney .powered-by .by {
+  position: relative;
+  top: -9px;
+  margin-right: 5px;
+}
+.whitney .powered-by img {
+  width: 8rem;
+}
+.whitney .ui.container {
+  width: 100%;
+}
+.whitney .ui.menu {
+  background-color: #fff;
+  height: 60px;
+  box-shadow: none;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-radius: 0;
+  padding-left: 2rem;
+}
+.whitney .ui.menu .item {
+  color: #949494;
+  font-size: 2rem;
+  line-height: .92;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  padding: 0;
+}
+.whitney .ui.menu .active.item {
+  background: #ffffff;
+  margin-right: 3rem;
+}
+.whitney .ui.menu .active.item.active {
+  color: #000000;
+}
+.whitney .ui.menu .item:before {
+  content: none;
+}
+.whitney .info-field {
+  display: block;
+}
+.whitney .eth-addr span {
+  font-family: monospace;
+  font-size: 1rem;
+}
+.whitney .divided .column {
+  box-shadow: none !important;
+}
+.whitney h4.info-field {
+  margin: 0.5rem 0;
+}
+.whitney h4.info-field span.info-title {
+  font-family: inherit;
+  width: 130px;
+  display: inline-block;
+}
+.whitney .landing-img a {
+  animation: colorChange 10s infinite;
+  -webkit-animation: colorChange 10s infinite;
+  padding: 4rem;
+  margin: 1rem 0 2rem 2rem;
+}
+.whitney .token-info-container {
+  animation: borderColorChange 10s infinite;
+  -webkit-animation: borderColorChange 10s infinite;
+  margin-right: 2rem;
+}
+@keyframes colorChange {
+  0%   {background: #00adee;}
+  25%  {background: #f89420;}
+  50%  {background: #00a551;}
+  75%  {background: #ee1c26;}
+  100% {background: #00adee;}
+}
+
+@-webkit-keyframes colorChange {
+  0%   {background: #00adee;}
+  25%  {background: #f89420;}
+  50%  {background: #00a551;}
+  75%  {background: #ee1c26;}
+  100% {background: #00adee;}
+}
+@keyframes borderColorChange {
+  0%   {border-bottom: 2px solid #00adee;}
+  25%  {border-bottom: 2px solid #f89420;}
+  50%  {border-bottom: 2px solid #00a551;}
+  75%  {border-bottom: 2px solid #ee1c26;}
+  100% {border-bottom: 2px solid #00adee;}
+}
+
+@-webkit-keyframes borderColorChange {
+  0%   {border-bottom: 2px solid #00adee;}
+  25%  {border-bottom: 2px solid #f89420;}
+  50%  {border-bottom: 2px solid #00a551;}
+  75%  {border-bottom: 2px solid #ee1c26;}
+  100% {border-bottom: 2px solid #00adee;}
+}
+.whitney .page-content-container .ui.input input,
+.whitney .page-content-container .ui.primary.button {
+  border: 1px solid #000000;
+  border-radius: 0;
+}
+.whitney .page-content-container .ui.primary.button {
+  background: #ffff;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+.whitney .page-content-container {
+  margin: 0 2rem 0 0;
+}
+.whitney .page-content-container .ui.segment {
+  border: none !important;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+.whitney .ui.message {
+  border-radius: 0;
+}
+.whitney .content-heading {
+  margin-top: 1rem;
+  text-transform: uppercase;
+  font-size: 1.55rem;
+}
+.whitney .token-tracker-list {
+  /* max-height: 360px; */
+  max-height: 315px;
+  overflow-y: scroll;
+}
+.whitney .ui.raised.card {
+  /* border-bottom: 1px solid #dcdcdc; */
+  border-radius: 0;
+  box-shadow: none !important;
+  border-left: 1px solid #000;
+  margin-left: 0 !important;
+  padding-left: 1rem;
+}
+.whitney .ui.raised.card .content {
+  padding: .25rem 0;
+}
+.whitney .ui.raised.card .content .button {
+  border-radius: 0;
+  border: 1px solid #000 !important;
+  box-shadow: none !important;
+  text-transform: uppercase;
+  margin-top: .25rem;
+}
+.whitney .ui.raised.card .content .button a {
+  color: #000 !important;
+}

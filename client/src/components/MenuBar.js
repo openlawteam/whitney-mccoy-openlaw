@@ -39,7 +39,7 @@ export default class MenuBar extends Component {
           as = {NavLink}
           to = '/Transfer-Donor' 
         >
-        Transfer Donor of Record Token
+        Transfer Donor Token
         </Menu.Item>
 
       {/* JSX Comment  
