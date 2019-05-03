@@ -5,6 +5,9 @@ To start from the terminal and run on http://localhost:3000:
 2. "cd client" (client folder in the root directory). 
 3. "npm run start" 
 
+# Todo for Jennifer & Kevin
+In the 'fresh-token-contract' branch. This is a fresh solidity contract with no tokens minted.  Ownership is with your Eth address: 0xA57fB5A5aD51beb3854D801ea3Ad6AC2845CD082.  So, you should be the only Minter.  
+
 # Todo: 
 
 - on TransferToken component - 'success message' takes too long to load ( > 2min after the transaction has cleared on MetaMask). Same issue for "MintToken" and "AllowSpender" components on the Artist-Dashboard.
