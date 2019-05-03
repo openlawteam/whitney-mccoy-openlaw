@@ -22,16 +22,7 @@ export default class MenuBar extends Component {
         >
         Token Tracker
         </Menu.Item>
-{/* JSX Comment 
-        <Menu.Item name='newDonor' 
-        active={activeItem === 'newDonor'}
-        onClick={this.handleItemClick}
-        as = {NavLink}
-        to = '/New-Donor'
-        >
-          Sign up to be Donor of Record
-        </Menu.Item>
-*/}
+
         <Menu.Item
           name='transferDonor'
           active={activeItem === 'transferDonor'}

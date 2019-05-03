@@ -8,8 +8,8 @@ import ImageMcCoy from './components/ImageMcCoy';
 //Pages
 import TransferDonorPage from './pages/TransferDonorPage';
 import LandingPage from './pages/LandingPage';
-import NewDonorPage from './pages/NewDonorPage';
 import ArtistDashboardPage from './pages/ArtistDashboardPage';
+import NoMatch from './pages/NoMatch';
 //Router
 import { Switch, Route, withRouter } from 'react-router-dom';
 //CSS
@@ -41,8 +41,9 @@ class App extends Component {
                     <Switch>
                       <Route exact path='/' component={LandingPage}></Route>
                       <Route exact path='/Transfer-Donor' component={TransferDonorPage}></Route>
-                      <Route exact path='/New-Donor' component={NewDonorPage}></Route>
+                      
                       <Route exact path='/Artist-Dashboard' component={ArtistDashboardPage}></Route>
+                       <Route component={NoMatch} />
                     </Switch>
                   </div>
 
