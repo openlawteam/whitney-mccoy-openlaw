@@ -111,6 +111,9 @@
   width: 130px;
   display: inline-block;
 }
+.whitney .owner-addr {
+  font-family: monospace;
+}
 .whitney .landing-img a {
   animation: colorChange 10s infinite;
   -webkit-animation: colorChange 10s infinite;
