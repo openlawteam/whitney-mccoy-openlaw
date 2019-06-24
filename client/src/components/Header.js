@@ -69,7 +69,7 @@ class Header extends Component{
   render() {
     return (
       <div className="token-info-container">
-        <h2 className="info-field mccoy-text">Public / Private Key <span className="by-mccoys">by Jennifer & Kevin McCoy</span></h2>
+        <h2 className="info-field mccoy-text">Public Key / Private Key <span className="by-mccoys">by Jennifer & Kevin McCoy</span></h2>
         <h4 className="info-field eth-addr"><span className="info-title">Contract Address:</span> <span>{this.state.contractAddress}</span></h4>
         <h4 className="info-field"><span className="info-title">Token Name:</span> {this.state.tokenName} </h4>
         <h4 className="info-field"><span className="info-title">Token Symbol:</span> {this.state.tokenSymbol}</h4>
