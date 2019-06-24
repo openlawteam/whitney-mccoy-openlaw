@@ -60,7 +60,15 @@ class Header extends Component{
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
+        `
+        Check your MetaMask account connection.
+
+        This site requires MetaMask or another Ethereum wallet to enjoy to its fullest.
+       
+        If you need to install the MetaMask plugin go to : 
+        https://metamask.io/
+
+        Failed to load web3, accounts, or contract. Check console for details.`,
       );
       console.error(error);
     }
@@ -70,7 +78,7 @@ class Header extends Component{
     return (
       <div className="token-info-container">
         <h2 className="info-field mccoy-text">Public Key / Private Key <span className="by-mccoys">by Jennifer & Kevin McCoy</span></h2>
-        <h4 className="info-field eth-addr"><span className="info-title">Contract Address:</span> <span>{this.state.contractAddress}</span></h4>
+        <h4 className="info-field eth-addr"><span className="info-title">Contract Address:</span> <span>0xD70e079DaE4dc3c40519fBe568bC3FB70E1dD87e</span></h4>
         <h4 className="info-field"><span className="info-title">Token Name:</span> {this.state.tokenName} </h4>
         <h4 className="info-field"><span className="info-title">Token Symbol:</span> {this.state.tokenSymbol}</h4>
         <h4 className="info-field"><span className="info-title">Total Supply:</span> {this.state.allTokens} tokens</h4>
